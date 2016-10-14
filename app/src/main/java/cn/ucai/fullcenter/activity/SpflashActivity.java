@@ -31,6 +31,7 @@ public class SpflashActivity extends AppCompatActivity {
                     }
                 }
                 startActivity(new Intent(SpflashActivity.this,MainActivity.class));
+                finish();
             }
         }).start();
     }
