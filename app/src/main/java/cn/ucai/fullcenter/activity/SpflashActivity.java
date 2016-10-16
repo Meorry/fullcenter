@@ -1,10 +1,11 @@
 package cn.ucai.fullcenter.activity;
 
-import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import cn.ucai.fullcenter.R;
+import cn.ucai.fullcenter.utils.MFGT;
 
 
 public class SpflashActivity extends AppCompatActivity {
@@ -18,21 +19,12 @@ public class SpflashActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        new Thread(new Runnable() {
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                long start = System.currentTimeMillis();
-                long cost_time=System.currentTimeMillis()-start;
-                if(SLEEP_TIME-cost_time>0){
-                    try {
-                        Thread.sleep(SLEEP_TIME-cost_time);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                startActivity(new Intent(SpflashActivity.this,MainActivity.class));
+                MFGT.gotoMainActivity(SpflashActivity.this);
                 finish();
             }
-        }).start();
+        },SLEEP_TIME);
     }
 }
