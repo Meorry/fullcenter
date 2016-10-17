@@ -1,7 +1,8 @@
 package cn.ucai.fullcenter.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.Adapter;
+import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -21,7 +22,7 @@ import cn.ucai.fullcenter.utils.L;
 /**
  * Created by Administrator on 2016/10/17.
  */
-public class GoodsAdapter extends RecyclerView.Adapter {
+public class GoodsAdapter extends Adapter {
     Context mContext;
     ArrayList<NewGoodsBean> mList;
 
@@ -32,8 +33,8 @@ public class GoodsAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        RecyclerView.ViewHolder holder = null;
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+         ViewHolder holder = null;
         if (viewType == I.TYPE_FOOTER) {
             holder = new FooterViewHolder(View.inflate(mContext, R.layout.iterm_footer, null));
         } else {
@@ -43,15 +44,15 @@ public class GoodsAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-       if(position==I.TYPE_FOOTER){
+    public void onBindViewHolder(ViewHolder holder, int position) {
+       if(getItemViewType(position)==I.TYPE_FOOTER){
 
        }else {
            GoodsViewHolder mGoodsViewHolder= (GoodsViewHolder) holder;
            NewGoodsBean mNewGoodsBean=mList.get(position);
+            ImageLoader.downloadImg(mContext,mGoodsViewHolder.ivGoodsPicture,mNewGoodsBean.getGoodsThumb());
            mGoodsViewHolder.tvGoodName.setText(mNewGoodsBean.getGoodsName());
            mGoodsViewHolder.tvGoodPrice.setText(mNewGoodsBean.getCurrencyPrice());
-           ImageLoader.downloadImg(mContext,mGoodsViewHolder.ivGoodsPicture,mNewGoodsBean.getGoodsThumb());
        }
     }
 
@@ -65,7 +66,7 @@ public class GoodsAdapter extends RecyclerView.Adapter {
         if (position == getItemCount() - 1) {
             return I.TYPE_FOOTER;
         }
-        return I.TYPE_FOOTER;
+        return I.TYPE_ITEM;
     }
 
     public void initData(ArrayList<NewGoodsBean> list) {
@@ -77,7 +78,7 @@ public class GoodsAdapter extends RecyclerView.Adapter {
     }
 
 
-    static class FooterViewHolder extends RecyclerView.ViewHolder{
+    static class FooterViewHolder extends ViewHolder{
         @BindView(R.id.tvFooter)
         TextView tvFooter;
 
@@ -87,7 +88,7 @@ public class GoodsAdapter extends RecyclerView.Adapter {
         }
     }
 
-    class GoodsViewHolder extends RecyclerView.ViewHolder{
+    class GoodsViewHolder extends ViewHolder{
         @BindView(R.id.ivGoodsPicture)
         ImageView ivGoodsPicture;
         @BindView(R.id.tvGoodName)
