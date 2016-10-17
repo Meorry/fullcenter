@@ -15,6 +15,7 @@ import butterknife.ButterKnife;
 import cn.ucai.fullcenter.I;
 import cn.ucai.fullcenter.R;
 import cn.ucai.fullcenter.bean.NewGoodsBean;
+import cn.ucai.fullcenter.utils.ImageLoader;
 
 /**
  * Created by Administrator on 2016/10/17.
@@ -48,6 +49,7 @@ public class GoodsAdapter extends RecyclerView.Adapter {
            NewGoodsBean mNewGoodsBean=mList.get(position);
            mGoodsViewHolder.tvGoodName.setText(mNewGoodsBean.getGoodsName());
            mGoodsViewHolder.tvGoodPrice.setText(mNewGoodsBean.getCurrencyPrice());
+           ImageLoader.downloadImg(mContext,mGoodsViewHolder.ivGoodsPicture,mNewGoodsBean.getGoodsThumb());
        }
     }
 
