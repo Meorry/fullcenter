@@ -12,11 +12,6 @@
          android:background="@color/bottom_bar_taobao_bg"
          android:gravity="center_vertical"
          android:orientation="horizontal">
-         <RadioGroup
-             android:id="@+id/rg_bottom_layout"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:orientation="horizontal">
              <RadioButton
                  android:id="@+id/layout_new_good"
                 android:drawableTop="@drawable/selector_menu_item_new_good"
@@ -85,7 +80,6 @@
                  android:textColor="@color/main_botton_text_color"
                  android:text="我"
                  android:checked="false"/>
-             </RadioGroup>
          </LinearLayout>
     <View
         android:id="@+id/vLine"
