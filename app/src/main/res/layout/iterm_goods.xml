@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/line_new_goods"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:layout_margin="20dp"
+    android:weightSum="1"
+    >
+    <ImageView
+        android:id="@+id/ivGoodsPicture"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/nopic"
+        android:scaleType="fitXY"
+        android:layout_gravity="center"
+
+
+        />
+    <TextView
+        android:id="@+id/tvGoodName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="商品名称"
+        android:textSize="20dp"
+        android:textColor="@color/item_good_text"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="5dp"/>
+    <TextView
+        android:id="@+id/tvGoodPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/item_good_price"
+        android:text="100元"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="5dp"/>
+
+
+</LinearLayout>

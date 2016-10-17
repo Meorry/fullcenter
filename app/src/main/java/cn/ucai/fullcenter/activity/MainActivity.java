@@ -3,9 +3,7 @@ package cn.ucai.fullcenter.activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -23,10 +21,10 @@ public class MainActivity extends AppCompatActivity {
     RadioButton layoutCategory;
     @BindView(R.id.layout_cart)
     RadioButton layoutCart;
-    @BindView(R.id.tvCartHint)
-    TextView tvCartHint;
     @BindView(R.id.layout_personal_center)
     RadioButton layoutPersonalCenter;
+    @BindView(R.id.tvCartHint)
+    TextView tvCartHint;
 
     int index=0;
 
