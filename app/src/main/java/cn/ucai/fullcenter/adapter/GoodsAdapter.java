@@ -16,6 +16,7 @@ import cn.ucai.fullcenter.I;
 import cn.ucai.fullcenter.R;
 import cn.ucai.fullcenter.bean.NewGoodsBean;
 import cn.ucai.fullcenter.utils.ImageLoader;
+import cn.ucai.fullcenter.utils.L;
 
 /**
  * Created by Administrator on 2016/10/17.
@@ -24,9 +25,10 @@ public class GoodsAdapter extends RecyclerView.Adapter {
     Context mContext;
     ArrayList<NewGoodsBean> mList;
 
-    public GoodsAdapter(ArrayList<NewGoodsBean> mList, Context mContext) {
-        this.mList = mList;
-        this.mContext = mContext;
+    public GoodsAdapter(ArrayList<NewGoodsBean> list, Context context) {
+        mList=new ArrayList<>();
+        mList.addAll(list);
+        mContext = context;
     }
 
     @Override
@@ -64,6 +66,14 @@ public class GoodsAdapter extends RecyclerView.Adapter {
             return I.TYPE_FOOTER;
         }
         return I.TYPE_FOOTER;
+    }
+
+    public void initData(ArrayList<NewGoodsBean> list) {
+        if(mList!=null){
+        mList.clear();
+        }
+        mList.addAll(list);
+        notifyDataSetChanged();
     }
 
 
