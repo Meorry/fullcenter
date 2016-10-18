@@ -84,7 +84,6 @@ public class NewGoodsFragment extends Fragment {
                 tvRefresh.setVisibility(View.VISIBLE);
                 pageId = 1;
                 downLoadData(I.ACTION_PULL_DOWN);
-                L.e("ddddddddddddddddddd");
             }
         });
     }

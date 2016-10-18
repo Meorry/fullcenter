@@ -1,6 +1,7 @@
 package cn.ucai.fullcenter.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.View;
@@ -13,8 +14,10 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.ucai.fullcenter.I;
 import cn.ucai.fullcenter.R;
+import cn.ucai.fullcenter.activity.GoodsDetailsActivit;
 import cn.ucai.fullcenter.bean.NewGoodsBean;
 import cn.ucai.fullcenter.utils.ImageLoader;
 
@@ -65,6 +68,7 @@ public class GoodsAdapter extends Adapter {
             ImageLoader.downloadImg(mContext,mGoodsViewHolder.ivGoodsPicture,mNewGoodsBean.getGoodsThumb());
            mGoodsViewHolder.tvGoodName.setText(mNewGoodsBean.getGoodsName());
            mGoodsViewHolder.tvGoodPrice.setText(mNewGoodsBean.getCurrencyPrice());
+           mGoodsViewHolder.lineNewGoods.setTag(mNewGoodsBean.getGoodsId());
        }
     }
 
@@ -125,5 +129,14 @@ public class GoodsAdapter extends Adapter {
             super(view);
             ButterKnife.bind(this, view);
         }
+        @OnClick(R.id.line_new_goods)
+        public void OnGoodsItermDetailClick(){
+            int goodId = (int) lineNewGoods.getTag();
+            mContext.startActivity(new Intent(mContext, GoodsDetailsActivit.class)
+                    .putExtra(I.GoodsDetails.KEY_GOODS_ID,goodId));
+
+
+        }
+
     }
 }
