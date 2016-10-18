@@ -17,7 +17,6 @@ import cn.ucai.fullcenter.I;
 import cn.ucai.fullcenter.R;
 import cn.ucai.fullcenter.bean.NewGoodsBean;
 import cn.ucai.fullcenter.utils.ImageLoader;
-import cn.ucai.fullcenter.utils.L;
 
 /**
  * Created by Administrator on 2016/10/17.
@@ -25,6 +24,17 @@ import cn.ucai.fullcenter.utils.L;
 public class GoodsAdapter extends Adapter {
     Context mContext;
     ArrayList<NewGoodsBean> mList;
+
+    boolean isMore;//加载信息提示
+
+    public boolean isMore() {
+        return isMore;
+    }
+
+    public void setMore(boolean more) {
+        isMore = more;
+        notifyDataSetChanged();
+    }
 
     public GoodsAdapter(ArrayList<NewGoodsBean> list, Context context) {
         mList=new ArrayList<>();
@@ -46,6 +56,8 @@ public class GoodsAdapter extends Adapter {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
        if(getItemViewType(position)==I.TYPE_FOOTER){
+           FooterViewHolder mFooterViewHolder= (FooterViewHolder) holder;
+           mFooterViewHolder.tvFooter.setText(getFootString());
 
        }else {
            GoodsViewHolder mGoodsViewHolder= (GoodsViewHolder) holder;
@@ -73,6 +85,17 @@ public class GoodsAdapter extends Adapter {
         if(mList!=null){
         mList.clear();
         }
+        mList.addAll(list);
+        notifyDataSetChanged();
+    }
+    /**
+     * 设置页脚页眉提示信息
+     */
+    public int getFootString() {
+        return isMore?R.string.load_more:R.string.no_more;
+    }
+
+    public void AddData(ArrayList<NewGoodsBean> list) {
         mList.addAll(list);
         notifyDataSetChanged();
     }
