@@ -20,6 +20,7 @@ import cn.ucai.fullcenter.R;
 import cn.ucai.fullcenter.activity.GoodsDetailsActivit;
 import cn.ucai.fullcenter.bean.NewGoodsBean;
 import cn.ucai.fullcenter.utils.ImageLoader;
+import cn.ucai.fullcenter.utils.MFGT;
 
 /**
  * Created by Administrator on 2016/10/17.
@@ -132,9 +133,7 @@ public class GoodsAdapter extends Adapter {
         @OnClick(R.id.line_new_goods)
         public void OnGoodsItermDetailClick(){
             int goodId = (int) lineNewGoods.getTag();
-            mContext.startActivity(new Intent(mContext, GoodsDetailsActivit.class)
-                    .putExtra(I.GoodsDetails.KEY_GOODS_ID,goodId));
-
+             MFGT.gotoGoodsDetailsActivity(mContext,goodId);
 
         }
 
