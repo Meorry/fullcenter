@@ -25,6 +25,7 @@ import cn.ucai.fullcenter.netDao.OkHttpUtils;
 import cn.ucai.fullcenter.utils.CommonUtils;
 import cn.ucai.fullcenter.utils.ConvertUtils;
 import cn.ucai.fullcenter.utils.L;
+import cn.ucai.fullcenter.views.SpaceItemDecoration;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -161,6 +162,7 @@ public class NewGoodsFragment extends Fragment {
         rlv.setLayoutManager(mGridLayoutManager);
         rlv.setHasFixedSize(true);
         rlv.setAdapter(mAdapter);
+        rlv.addItemDecoration(new SpaceItemDecoration(16));
     }
 
 }

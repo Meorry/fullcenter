@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:layout_margin="20dp"
+    android:padding="10dp"
     android:weightSum="1"
     >
     <ImageView
