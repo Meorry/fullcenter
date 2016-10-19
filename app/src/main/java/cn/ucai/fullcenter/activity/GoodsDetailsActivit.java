@@ -23,7 +23,7 @@ import cn.ucai.fullcenter.utils.MFGT;
 import cn.ucai.fullcenter.views.FlowIndicator;
 import cn.ucai.fullcenter.views.SlideAutoLoopView;
 
-public class GoodsDetailsActivit extends AppCompatActivity {
+public class GoodsDetailsActivit extends BaseActivity {
 
     @BindView(R.id.backClickArea)
     LinearLayout backClickArea;
@@ -44,8 +44,7 @@ public class GoodsDetailsActivit extends AppCompatActivity {
     int goodId;
     GoodsDetailsActivit mContext;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_goods_details);
         ButterKnife.bind(this);
         goodId = getIntent().getIntExtra(I.GoodsDetails.KEY_GOODS_ID, 0);
@@ -54,15 +53,17 @@ public class GoodsDetailsActivit extends AppCompatActivity {
             finish();
         }
         mContext=this;
-        initView();
-        initData();
-        setListener();
+//        initView();
+//        initData();
+//        setListener();
+        super.onCreate(savedInstanceState);
+    }
+     @Override
+   protected void setListener() {
     }
 
-    private void setListener() {
-    }
-
-    private void initData() {
+    @Override
+    protected void initData() {
         NetDao.downLoadGoodsDetails(mContext, goodId, new OkHttpUtils.OnCompleteListener<GoodsDetailsBean>() {
             @Override
             public void onSuccess(GoodsDetailsBean result) {
@@ -111,7 +112,8 @@ public class GoodsDetailsActivit extends AppCompatActivity {
         return  urls;
     }
 
-    private void initView() {
+    @Override
+    protected void initView() {
     }
 
     @OnClick(R.id.backClickArea)
@@ -119,7 +121,4 @@ public class GoodsDetailsActivit extends AppCompatActivity {
         MFGT.finish(this);
     }
 
-//    public void onBback(View v){
-//        MFGT.finish(this);
-//    }
 }

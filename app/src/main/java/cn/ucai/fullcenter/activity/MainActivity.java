@@ -14,8 +14,9 @@ import cn.ucai.fullcenter.R;
 import cn.ucai.fullcenter.fragment.BoutiqueFragment;
 import cn.ucai.fullcenter.fragment.NewGoodsFragment;
 import cn.ucai.fullcenter.utils.L;
+import cn.ucai.fullcenter.utils.MFGT;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @BindView(R.id.layout_new_good)
     RadioButton layoutNewGood;
@@ -30,58 +31,69 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.tvCartHint)
     TextView tvCartHint;
 
-    int index=0;
+    int index = 0;
     int currentIndex;
     RadioButton[] radioButtons;
     Fragment[] fragments;
     NewGoodsFragment mNewGoodsFragment;
     BoutiqueFragment mBoutiqueFragment;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         L.i("MainActivity onCreate");
-        initView();
+        super.onCreate(savedInstanceState);
+//        initView();
         initFragment();
     }
 
     private void initFragment() {
-        fragments=new Fragment[5];
+        fragments = new Fragment[5];
         mNewGoodsFragment = new NewGoodsFragment();
         mBoutiqueFragment = new BoutiqueFragment();
         fragments[0] = mNewGoodsFragment;
         fragments[1] = mBoutiqueFragment;
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_container,mNewGoodsFragment)
-                .add(R.id.fragment_container,mBoutiqueFragment)
+                .add(R.id.fragment_container, mNewGoodsFragment)
+                .add(R.id.fragment_container, mBoutiqueFragment)
                 .hide(mBoutiqueFragment)
                 .show(mNewGoodsFragment).commit();
 
     }
+     @Override
+   protected void initView() {
+        radioButtons = new RadioButton[]{layoutNewGood, layoutBoutique, layoutCategory, layoutCart, layoutPersonalCenter};
+    }
 
-    private void initView() {
-        radioButtons=new RadioButton[]{layoutNewGood,layoutBoutique,layoutCategory,layoutCart,layoutPersonalCenter};
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void setListener() {
+
     }
 
     public void onCheckedChange(View v) {
-       switch (v.getId()){
-           case  R.id.layout_new_good:
-               index=0;
-           break;
-           case  R.id.layout_boutique:
-               index=1;
-               break;
-           case  R.id.layout_category:
-               index=2;
-               break;
-           case  R.id.layout_cart:
-               index=3;
-               break;
-           case  R.id.layout_personal_center:
-               index=4;
-               break;
-       }
+        switch (v.getId()) {
+            case R.id.layout_new_good:
+                index = 0;
+                break;
+            case R.id.layout_boutique:
+                index = 1;
+                break;
+            case R.id.layout_category:
+                index = 2;
+                break;
+            case R.id.layout_cart:
+                index = 3;
+                break;
+            case R.id.layout_personal_center:
+                index = 4;
+                break;
+        }
         setFragment();
     }
 
@@ -89,8 +101,8 @@ public class MainActivity extends AppCompatActivity {
         if (index != currentIndex) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.hide(fragments[currentIndex]);
-            if(!fragments[index].isAdded()){
-                ft.add(R.id.fragment_container,fragments[index]);
+            if (!fragments[index].isAdded()) {
+                ft.add(R.id.fragment_container, fragments[index]);
             }
             ft.show(fragments[index]).commit();
             setRadioButtonStatus();
@@ -99,13 +111,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setRadioButtonStatus() {
-        for(int i=0;i<radioButtons.length;i++){
-            if(i==index){
+        for (int i = 0; i < radioButtons.length; i++) {
+            if (i == index) {
                 radioButtons[i].setChecked(true);
-            }else
+            } else
                 radioButtons[i].setChecked(false);
 
         }
+    }
+
+    public void onBackPressed(){
+      finish();
     }
 
 }
