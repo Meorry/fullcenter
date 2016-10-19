@@ -30,8 +30,7 @@ import cn.ucai.fullcenter.views.SpaceItemDecoration;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewGoodsFragment extends Fragment {
-
+public class NewGoodsFragment extends BaseFragment {
 
     @BindView(R.id.tv_refresh)
     TextView tvRefresh;
@@ -59,16 +58,18 @@ public class NewGoodsFragment extends Fragment {
         mContext = (MainActivity) getContext();
         mList = new ArrayList<>();
         mAdapter = new GoodsAdapter(mList, mContext);
-        initView();
-        initData();
-        setListener();
+        super.onCreateView(inflater,container,savedInstanceState);
+//        initView();
+//        initData();
+//        setListener();
         return layout;
     }
 
     /**
      * 创建一个监听器
      */
-    private void setListener() {
+    @Override
+    protected void setListener() {
         setPullUpListener();
         setPullDownListener();
     }
@@ -114,7 +115,8 @@ public class NewGoodsFragment extends Fragment {
         });
     }
 
-    private void initData() {
+    @Override
+    protected void initData() {
         downLoadData(I.ACTION_DOWNLOAD);
     }
 
@@ -151,8 +153,8 @@ public class NewGoodsFragment extends Fragment {
             }
         });
     }
-
-    private void initView() {
+    @Override
+    protected void initView() {
         sfl.setColorSchemeColors(getResources().getColor(R.color.google_blue),
                 getResources().getColor(R.color.google_yellow),
                 getResources().getColor(R.color.google_red),

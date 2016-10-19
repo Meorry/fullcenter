@@ -29,7 +29,7 @@ import cn.ucai.fullcenter.views.SpaceItemDecoration;
 /**
  * Created by Administrator on 2016/10/19.
  */
-public class BoutiqueFragment extends Fragment {
+public class BoutiqueFragment extends BaseFragment {
 
     @BindView(R.id.tv_refresh)
     TextView tvRefresh;
@@ -41,7 +41,6 @@ public class BoutiqueFragment extends Fragment {
     MainActivity mContext;
     BoutiqueAdapter mAdapter;
     ArrayList<BoutiqueBean> mList;
-    int pageId=1;
     public BoutiqueFragment() {
     }
 
@@ -53,13 +52,14 @@ public class BoutiqueFragment extends Fragment {
         mContext = (MainActivity) getContext();
         mList=new ArrayList<>();
         mAdapter = new BoutiqueAdapter(mContext,mList);
-        initView();
-        initData();
-        setListener();
+        super.onCreateView(inflater,container,savedInstanceState);
+//        initView();
+//        initData();
+//        setListener();
         return layout;
     }
-
-    private void setListener() {
+     @Override
+    protected void setListener() {
         setPullDownListener();
     }
     private void setPullDownListener() {
@@ -68,13 +68,13 @@ public class BoutiqueFragment extends Fragment {
             public void onRefresh() {
                 sfl.setRefreshing(true);
                 tvRefresh.setVisibility(View.VISIBLE);
-                pageId = 1;
                 downLoadData();
             }
         });
     }
 
-    private void initData() {
+    @Override
+    protected void initData() {
         downLoadData();
     }
 
@@ -100,7 +100,8 @@ public class BoutiqueFragment extends Fragment {
         });
     }
 
-    private void initView() {
+    @Override
+    protected void initView() {
         sfl.setColorSchemeColors(getResources().getColor(R.color.google_blue),
                 getResources().getColor(R.color.google_yellow),
                 getResources().getColor(R.color.google_red),
