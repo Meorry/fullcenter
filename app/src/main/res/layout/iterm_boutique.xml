@@ -5,14 +5,14 @@
     <ImageView
         android:id="@+id/ivBoutiqueImage"
         android:layout_width="200dp"
-        android:layout_height="300dp"
+        android:layout_height="200dp"
         android:src="@drawable/nopic"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp"/>
     <LinearLayout
         android:layout_toRightOf="@id/ivBoutiqueImage"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="200dp"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp"
         android:orientation="vertical">
@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="不一样的新妆，不一样的美丽"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="15dp"
             android:textColor="@color/list_item_title"
             android:textSize="20dp"
             />
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:text="拯救头发，美丽新妆"
             android:textSize="20dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="15dp"
             android:textColor="@color/list_item_name"
             />
         <TextView
@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="快速增长修护预防脱发洗发水让头发健康快速生长更美丽"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="15dp"
             android:textSize="20dp"
             android:textColor="@color/list_item_des"
             />

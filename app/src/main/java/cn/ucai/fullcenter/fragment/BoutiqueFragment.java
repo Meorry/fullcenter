@@ -15,7 +15,6 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cn.ucai.fullcenter.I;
 import cn.ucai.fullcenter.R;
 import cn.ucai.fullcenter.activity.MainActivity;
 import cn.ucai.fullcenter.adapter.BoutiqueAdapter;
@@ -62,33 +61,7 @@ public class BoutiqueFragment extends Fragment {
 
     private void setListener() {
         setPullDownListener();
-        setPullUpListener();
-
     }
-
-    private void setPullUpListener() {
-        rlv.setOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                int lastPosition = mLinearLayoutManager.findLastVisibleItemPosition();
-                if (newState == RecyclerView.SCROLL_STATE_IDLE
-                        && lastPosition == mAdapter.getItemCount() - 1
-                        && mAdapter.isMore()) {
-                    pageId++;
-                    downLoadData(I.ACTION_PULL_UP);
-                }
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                int firstPosition = mLinearLayoutManager.findFirstVisibleItemPosition();
-                sfl.setEnabled(firstPosition == 0);
-            }
-        });
-    }
-
     private void setPullDownListener() {
         sfl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -96,34 +69,24 @@ public class BoutiqueFragment extends Fragment {
                 sfl.setRefreshing(true);
                 tvRefresh.setVisibility(View.VISIBLE);
                 pageId = 1;
-                downLoadData(I.ACTION_PULL_DOWN);
+                downLoadData();
             }
         });
     }
 
     private void initData() {
-        downLoadData(I.ACTION_DOWNLOAD);
+        downLoadData();
     }
 
-    private void downLoadData(final int action) {
+    private void downLoadData() {
         NetDao.downLoadBoutique(mContext, new OkHttpUtils.OnCompleteListener<BoutiqueBean[]>() {
             @Override
             public void onSuccess(BoutiqueBean[] result) {
                 sfl.setRefreshing(false);//设置是否刷新
                 tvRefresh.setVisibility(View.GONE);//隐藏刷新提示
-                mAdapter.setMore(true);
                 if(result != null && result.length>0){
                     ArrayList<BoutiqueBean> list = ConvertUtils.array2List(result);
-                    if(action == I.ACTION_DOWNLOAD || action == I.ACTION_PULL_DOWN){
-                        mAdapter.initData(list);
-                    }else {
-                        mAdapter.addData(list);
-                    }
-                    if(list.size()>I.PAGE_SIZE_DEFAULT){
-                        mAdapter.setMore(false);
-                    }
-                }else {
-                    mAdapter.setMore(false);
+                    mAdapter.initData(list);
                 }
             }
 
