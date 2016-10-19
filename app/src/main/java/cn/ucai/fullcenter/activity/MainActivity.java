@@ -2,6 +2,7 @@ package cn.ucai.fullcenter.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.RadioButton;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.ucai.fullcenter.R;
+import cn.ucai.fullcenter.fragment.BoutiqueFragment;
 import cn.ucai.fullcenter.fragment.NewGoodsFragment;
 import cn.ucai.fullcenter.utils.L;
 
@@ -29,10 +31,11 @@ public class MainActivity extends AppCompatActivity {
     TextView tvCartHint;
 
     int index=0;
-
+    int currentIndex;
     RadioButton[] radioButtons;
     Fragment[] fragments;
     NewGoodsFragment mNewGoodsFragment;
+    BoutiqueFragment mBoutiqueFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,8 +48,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void initFragment() {
         fragments=new Fragment[5];
-        mNewGoodsFragment=new NewGoodsFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,mNewGoodsFragment)
+        mNewGoodsFragment = new NewGoodsFragment();
+        mBoutiqueFragment = new BoutiqueFragment();
+        fragments[0] = mNewGoodsFragment;
+        fragments[1] = mBoutiqueFragment;
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.fragment_container,mNewGoodsFragment)
+                .add(R.id.fragment_container,mBoutiqueFragment)
+                .hide(mBoutiqueFragment)
                 .show(mNewGoodsFragment).commit();
 
     }
@@ -73,7 +82,20 @@ public class MainActivity extends AppCompatActivity {
                index=4;
                break;
        }
-        setRadioButtonStatus();
+        setFragment();
+    }
+
+    private void setFragment() {
+        if (index != currentIndex) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.hide(fragments[currentIndex]);
+            if(!fragments[index].isAdded()){
+                ft.add(R.id.fragment_container,fragments[index]);
+            }
+            ft.show(fragments[index]).commit();
+            setRadioButtonStatus();
+            currentIndex = index;
+        }
     }
 
     private void setRadioButtonStatus() {

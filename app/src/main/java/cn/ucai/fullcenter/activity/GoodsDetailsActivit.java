@@ -119,7 +119,7 @@ public class GoodsDetailsActivit extends AppCompatActivity {
         MFGT.finish(this);
     }
 
-    public void onBback(View v){
-        MFGT.finish(this);
-    }
+//    public void onBback(View v){
+//        MFGT.finish(this);
+//    }
 }

@@ -3,6 +3,7 @@ package cn.ucai.fullcenter.netDao;
 import android.content.Context;
 
 import cn.ucai.fullcenter.I;
+import cn.ucai.fullcenter.bean.BoutiqueBean;
 import cn.ucai.fullcenter.bean.GoodsDetailsBean;
 import cn.ucai.fullcenter.bean.NewGoodsBean;
 
@@ -25,6 +26,13 @@ public class NetDao {
         utils.setRequestUrl(I.REQUEST_FIND_GOOD_DETAILS)
                 .addParam(I.GoodsDetails.KEY_GOODS_ID,String.valueOf(goodsId))
                 .targetClass(GoodsDetailsBean.class)
+                .execute(listener);
+    }
+
+    public static void downLoadBoutique(Context mcontext, OkHttpUtils.OnCompleteListener<BoutiqueBean[]> listener){
+        OkHttpUtils utils = new OkHttpUtils(mcontext);
+        utils.setRequestUrl(I.REQUEST_FIND_BOUTIQUES)
+                .targetClass(BoutiqueBean[].class)
                 .execute(listener);
     }
 
