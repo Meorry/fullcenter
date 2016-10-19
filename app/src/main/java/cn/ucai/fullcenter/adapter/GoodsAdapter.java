@@ -124,7 +124,7 @@ public class GoodsAdapter extends Adapter {
         }
         @OnClick(R.id.line_new_goods)
         public void OnGoodsItermDetailClick(){
-            int goodId = (int) lineNewGoods.getTag();
+           int goodId = (int) lineNewGoods.getTag();
              MFGT.gotoGoodsDetailsActivity(mContext,goodId);
 
         }

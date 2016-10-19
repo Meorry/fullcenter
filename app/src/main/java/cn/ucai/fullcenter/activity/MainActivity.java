@@ -45,7 +45,6 @@ public class MainActivity extends BaseActivity {
         L.i("MainActivity onCreate");
         super.onCreate(savedInstanceState);
 //        initView();
-        initFragment();
     }
 
     private void initFragment() {
@@ -68,7 +67,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-
+        initFragment();
     }
 
     @Override

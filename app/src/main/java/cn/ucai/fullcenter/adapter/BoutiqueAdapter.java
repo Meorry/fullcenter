@@ -5,15 +5,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.ucai.fullcenter.R;
 import cn.ucai.fullcenter.bean.BoutiqueBean;
 import cn.ucai.fullcenter.utils.ImageLoader;
+import cn.ucai.fullcenter.utils.MFGT;
 
 /**
  * Created by Administrator on 2016/10/19.
@@ -42,6 +46,7 @@ public class BoutiqueAdapter extends RecyclerView.Adapter {
             bh.tvBoutiqueTitle.setText(mBoutiqueBean.getTitle());
             bh.tvBoutiqueName.setText(mBoutiqueBean.getName());
             bh.tvBoutiqueDescription.setText(mBoutiqueBean.getDescription());
+            bh.mLinearLayout.setTag(mBoutiqueBean);
     }
     @Override
     public int getItemCount() {
@@ -63,10 +68,18 @@ public class BoutiqueAdapter extends RecyclerView.Adapter {
         TextView tvBoutiqueName;
         @BindView(R.id.tvBoutiqueDescription)
         TextView tvBoutiqueDescription;
+        @BindView(R.id.layoutBoutique)
+        RelativeLayout mLinearLayout;
 
         BoutiqueViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
+        @OnClick(R.id.layoutBoutique)
+        public void onBoutiqueClick(){
+            BoutiqueBean mBoutiqueBean= (BoutiqueBean) mLinearLayout.getTag();
+            MFGT.gotoBoutiqueSecondActivity(mContext,mBoutiqueBean);
+        }
+
     }
 }

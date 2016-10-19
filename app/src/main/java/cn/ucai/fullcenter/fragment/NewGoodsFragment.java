@@ -121,7 +121,7 @@ public class NewGoodsFragment extends BaseFragment {
     }
 
     private void downLoadData(final int action) {
-        NetDao.downLoadNewGoods(mContext, pageId, new OkHttpUtils.OnCompleteListener<NewGoodsBean[]>() {
+        NetDao.downLoadNewGoods(mContext,I.CAT_ID, pageId, new OkHttpUtils.OnCompleteListener<NewGoodsBean[]>() {
             @Override
             public void onSuccess(NewGoodsBean[] result) {
                 sfl.setRefreshing(false);
