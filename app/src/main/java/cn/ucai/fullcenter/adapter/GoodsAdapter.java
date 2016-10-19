@@ -21,6 +21,7 @@ import cn.ucai.fullcenter.activity.GoodsDetailsActivit;
 import cn.ucai.fullcenter.bean.NewGoodsBean;
 import cn.ucai.fullcenter.utils.ImageLoader;
 import cn.ucai.fullcenter.utils.MFGT;
+import cn.ucai.fullcenter.views.FooterViewHolder;
 
 /**
  * Created by Administrator on 2016/10/17.
@@ -106,15 +107,6 @@ public class GoodsAdapter extends Adapter {
     }
 
 
-    static class FooterViewHolder extends ViewHolder{
-        @BindView(R.id.tvFooter)
-        TextView tvFooter;
-
-        FooterViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
-        }
-    }
 
     class GoodsViewHolder extends ViewHolder{
         @BindView(R.id.ivGoodsPicture)

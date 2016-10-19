@@ -15,6 +15,7 @@ import cn.ucai.fullcenter.I;
 import cn.ucai.fullcenter.R;
 import cn.ucai.fullcenter.bean.BoutiqueBean;
 import cn.ucai.fullcenter.utils.ImageLoader;
+import cn.ucai.fullcenter.views.FooterViewHolder;
 
 /**
  * Created by Administrator on 2016/10/19.
@@ -34,7 +35,7 @@ public class BoutiqueAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder holder = null;
         if (viewType == I.TYPE_FOOTER) {
-            holder = new GoodsAdapter.FooterViewHolder(View.inflate(mContext, R.layout.iterm_footer, null));
+            holder = new FooterViewHolder(View.inflate(mContext, R.layout.iterm_footer, null));
         } else
             holder = new BoutiqueViewHolder(View.inflate(mContext, R.layout.iterm_boutique, null));
         return holder;
@@ -43,7 +44,7 @@ public class BoutiqueAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if(getItemViewType(position) == I.TYPE_FOOTER){
-            GoodsAdapter.FooterViewHolder fh = (GoodsAdapter.FooterViewHolder) holder;
+           FooterViewHolder fh = (FooterViewHolder) holder;
             fh.tvFooter.setText(goFootString());
 
         }else {
