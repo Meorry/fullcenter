@@ -50,6 +50,7 @@ public class CategoryFragment extends BaseFragment {
 
     @Override
     protected void initView() {
+        layoutListView.setGroupIndicator(null);
         layoutListView.setAdapter(mAdapter);
 
     }
@@ -69,6 +70,7 @@ public class CategoryFragment extends BaseFragment {
                     ArrayList<CategoryGroupBean> groupBeen = ConvertUtils.array2List(result);
                     mGroupList.addAll(groupBeen);
                     for(int i=0;i<groupBeen.size();i++){
+                        mChildList.add(new ArrayList<CategoryChildBean>());
                         CategoryGroupBean group = groupBeen.get(i);
                         downLoadChild(group.getId(),i);
                     }
@@ -82,7 +84,7 @@ public class CategoryFragment extends BaseFragment {
         });
     }
 
-    private void downLoadChild(int id,int index) {
+    private void downLoadChild(int id, final int index) {
         NetDao.downLoadCategoryChild(mContext, id, new OkHttpUtils.OnCompleteListener<CategoryChildBean[]>() {
             @Override
             public void onSuccess(CategoryChildBean[] result) {
@@ -90,7 +92,7 @@ public class CategoryFragment extends BaseFragment {
                 if(result!=null && result.length>0){
                     L.e("result= "+result.length);
                     ArrayList<CategoryChildBean> childBeen = ConvertUtils.array2List(result);
-                    mChildList.add(childBeen);
+                    mChildList.set(index,childBeen);
                 }
                 if(groupCount == mGroupList.size()){
                     mAdapter.initData(mGroupList,mChildList);

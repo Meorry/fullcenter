@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -15,6 +16,8 @@ import cn.ucai.fullcenter.R;
 import cn.ucai.fullcenter.bean.CategoryChildBean;
 import cn.ucai.fullcenter.bean.CategoryGroupBean;
 import cn.ucai.fullcenter.utils.ImageLoader;
+import cn.ucai.fullcenter.utils.L;
+import cn.ucai.fullcenter.utils.MFGT;
 
 /**
  * Created by Administrator on 2016/10/20.
@@ -51,7 +54,7 @@ public class CategoryAdapter extends BaseExpandableListAdapter {
 
     @Override
     public CategoryChildBean getChild(int groupPosition, int childPosition) {
-        return mChildList != null ? mChildList.get(groupPosition).get(childPosition) : null;
+        return mChildList != null && mChildList.get(groupPosition)!=null ? mChildList.get(groupPosition).get(childPosition) : null;
     }
 
     @Override
@@ -73,6 +76,7 @@ public class CategoryAdapter extends BaseExpandableListAdapter {
     public View getGroupView(int groupPosition, boolean isExpanded, View view, ViewGroup parent) {
         CategoryGroupViewHolder holder;
         if (view == null) {
+            L.e("mContext"+mContext+","+R.layout.iterm_category_group);
             view = View.inflate(mContext, R.layout.iterm_category_group, null);
             holder = new CategoryGroupViewHolder(view);
             view.setTag(holder);
@@ -94,13 +98,19 @@ public class CategoryAdapter extends BaseExpandableListAdapter {
         if (view == null) {
             view = View.inflate(mContext, R.layout.iterm_category_child, null);
             holder = new CategoryChildViewHolder(view);
-            view.setTag(view);
+            view.setTag(holder);
         }else {
             holder = (CategoryChildViewHolder) view.getTag();
         }
-        CategoryChildBean child = getChild(groupPosition, childPosition);
+        final CategoryChildBean child = getChild(groupPosition, childPosition);
         ImageLoader.downloadImg(mContext,holder.ivChildImage,child.getImageUrl());
         holder.tvChildName.setText(child.getName());
+        holder.mItermCategoryChild.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MFGT.gotoCategorySecondActivity(mContext,child.getId());
+            }
+        });
         return view;
     }
 
@@ -135,6 +145,8 @@ public class CategoryAdapter extends BaseExpandableListAdapter {
     }
 
      class CategoryChildViewHolder {
+         @BindView(R.id.iterm_category_child)
+         RelativeLayout mItermCategoryChild;
         @BindView(R.id.ivChildImage)
         ImageView ivChildImage;
         @BindView(R.id.tvChildName)

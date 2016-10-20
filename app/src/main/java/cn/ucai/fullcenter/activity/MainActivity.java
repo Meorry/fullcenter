@@ -12,6 +12,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.ucai.fullcenter.R;
 import cn.ucai.fullcenter.fragment.BoutiqueFragment;
+import cn.ucai.fullcenter.fragment.CategoryFragment;
 import cn.ucai.fullcenter.fragment.NewGoodsFragment;
 import cn.ucai.fullcenter.utils.L;
 import cn.ucai.fullcenter.utils.MFGT;
@@ -37,6 +38,7 @@ public class MainActivity extends BaseActivity {
     Fragment[] fragments;
     NewGoodsFragment mNewGoodsFragment;
     BoutiqueFragment mBoutiqueFragment;
+    CategoryFragment mCategoryFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,11 +53,15 @@ public class MainActivity extends BaseActivity {
         fragments = new Fragment[5];
         mNewGoodsFragment = new NewGoodsFragment();
         mBoutiqueFragment = new BoutiqueFragment();
+        mCategoryFragment = new CategoryFragment();
         fragments[0] = mNewGoodsFragment;
         fragments[1] = mBoutiqueFragment;
+        fragments[2] = mCategoryFragment;
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, mNewGoodsFragment)
                 .add(R.id.fragment_container, mBoutiqueFragment)
+                .add(R.id.fragment_container,mCategoryFragment)
+                .hide(mCategoryFragment)
                 .hide(mBoutiqueFragment)
                 .show(mNewGoodsFragment).commit();
 
