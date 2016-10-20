@@ -53,4 +53,19 @@ public class NetDao {
                 .execute(listener);
     }
 
+    /**
+     * 下载category
+     * @param mcontext
+     * @param catId
+     * @param listener
+     */
+    public static void downLoadCategoryGoods(Context mcontext, int catId,int pageId, OkHttpUtils.OnCompleteListener<NewGoodsBean[]> listener){
+        OkHttpUtils utils=new OkHttpUtils(mcontext);
+        utils.setRequestUrl(I.REQUEST_FIND_GOODS_DETAILS)
+                .addParam(I.NewAndBoutiqueGoods.CAT_ID,String.valueOf(catId))
+                .addParam(I.PAGE_ID,String.valueOf(pageId))
+                .addParam(I.PAGE_SIZE,String.valueOf(I.PAGE_SIZE_DEFAULT))
+                .targetClass(NewGoodsBean[].class)
+                .execute(listener);
+    }
 }
