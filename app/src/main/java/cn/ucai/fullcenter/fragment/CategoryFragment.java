@@ -105,14 +105,16 @@ public class CategoryFragment extends BaseFragment {
             }
         });
     }
-
+    /**
+     * 也可以在这里进行小分类监听事件
+     */
     @Override
     protected void setListener() {
-       layoutListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-           @Override
-           public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-               return false;
-           }
-       });
+//       layoutListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+//           @Override
+//           public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+//               return false;
+//           }
+//       });
     }
 }
