@@ -194,7 +194,8 @@ public class CategorySecondActivity extends BaseActivity {
                     right = getResources().getDrawable(R.mipmap.arrow_order_down);
                 }
                 right.setBounds(0, 0, right.getIntrinsicWidth(), right.getIntrinsicHeight());
-                mbtnSortPrice.setCompoundDrawablesWithIntrinsicBounds(null, null, right, null);
+                mbtnSortPrice.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, right, null);
+//                mbtnSortPrice.setCompoundDrawablesWithIntrinsicBounds(null, null, right, null);
                 priceAsc = !priceAsc;
                 break;
             case R.id.btn_sort_addTime:
@@ -206,7 +207,8 @@ public class CategorySecondActivity extends BaseActivity {
                     right = getResources().getDrawable(R.mipmap.arrow_order_down);
                 }
                 right.setBounds(0, 0, right.getIntrinsicWidth(), right.getIntrinsicHeight());
-                mbtnSortAddTime.setCompoundDrawablesWithIntrinsicBounds(null, null, right, null);
+                mbtnSortAddTime.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, right, null);
+//                mbtnSortAddTime.setCompoundDrawablesWithIntrinsicBounds(null, null, right, null);
                 addTimeAsc = !addTimeAsc;
                 break;
         }
