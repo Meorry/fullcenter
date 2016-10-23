@@ -1,6 +1,7 @@
 package cn.ucai.fullcenter.activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.EditText;
@@ -9,6 +10,7 @@ import android.widget.LinearLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.ucai.fullcenter.I;
 import cn.ucai.fullcenter.R;
 import cn.ucai.fullcenter.bean.Result;
 import cn.ucai.fullcenter.netDao.NetDao;
@@ -103,6 +105,7 @@ public class RegisterActivity extends BaseActivity {
                     CommonUtils.showShortToast(R.string.register_fail);
                 }else if(result.isRetMsg()){
                     CommonUtils.showLongToast(R.string.register_success);
+                    setResult(RESULT_OK,new Intent().putExtra(I.User.USER_NAME,username));
                     MFGT.finish(mcontext);
                 }else {
                     CommonUtils.showLongToast(R.string.register_fail_exists);

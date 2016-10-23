@@ -21,4 +21,8 @@
     <string name="register_success">register success</string>
     <string name="register_fail_exists">user name exists</string>
     <string name="login">Login</string>
+    <string name="login_fail" >登录失败</string>
+    <string name="logining">登录中</string>
+    <string name="login_fail_unknow_user">登录失败，用户名不存在</string>
+    <string name="login_fail_error_password">登录失败，密码错误</string>
 </resources>

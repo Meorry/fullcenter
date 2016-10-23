@@ -8,6 +8,8 @@ import cn.ucai.fullcenter.bean.CategoryChildBean;
 import cn.ucai.fullcenter.bean.CategoryGroupBean;
 import cn.ucai.fullcenter.bean.GoodsDetailsBean;
 import cn.ucai.fullcenter.bean.NewGoodsBean;
+import cn.ucai.fullcenter.bean.Result;
+import cn.ucai.fullcenter.utils.MD5;
 
 /**
  * Created by Administrator on 2016/10/17.
@@ -67,5 +69,32 @@ public class NetDao {
                 .addParam(I.PAGE_SIZE,String.valueOf(I.PAGE_SIZE_DEFAULT))
                 .targetClass(NewGoodsBean[].class)
                 .execute(listener);
+    }
+
+    /**
+     * 注册
+     */
+    public static void register(Context context, String username, String nick, String password,
+                                OkHttpUtils.OnCompleteListener<Result> listener){
+        OkHttpUtils<Result> utils = new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_REGISTER)
+                .addParam(I.User.USER_NAME, username)
+                .addParam(I.User.NICK,nick)
+                .addParam(I.User.PASSWORD, MD5.getMessageDigest(password))
+                .targetClass(Result.class)
+                .post()
+                .execute(listener);
+    }
+
+    public static void login(Context context,String username,String password,
+                             OkHttpUtils.OnCompleteListener<Result> listener){
+        OkHttpUtils<Result> utils=new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_LOGIN)
+                .addParam(I.User.USER_NAME,username)
+                .addParam(I.User.PASSWORD,MD5.getMessageDigest(password))
+                .targetClass(Result.class)
+                .execute(listener);
+
+
     }
 }
