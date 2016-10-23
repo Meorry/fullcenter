@@ -11,6 +11,7 @@ import cn.ucai.fullcenter.R;
 import cn.ucai.fullcenter.activity.BoutiqueSecondActivity;
 import cn.ucai.fullcenter.activity.CategorySecondActivity;
 import cn.ucai.fullcenter.activity.GoodsDetailsActivit;
+import cn.ucai.fullcenter.activity.LoginActivity;
 import cn.ucai.fullcenter.activity.MainActivity;
 import cn.ucai.fullcenter.bean.BoutiqueBean;
 import cn.ucai.fullcenter.bean.CategoryChildBean;
@@ -56,5 +57,9 @@ public class MFGT {
         intent.putExtra(I.CategoryGroup.NAME,name);
         intent.putExtra(I.CategoryChild.ID,list);
         startActivity(context,intent);
+    }
+
+    public static void gotoLoginActivity(Activity context){
+        startActivity(context, LoginActivity.class);
     }
 }
