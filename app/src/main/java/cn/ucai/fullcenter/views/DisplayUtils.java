@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import cn.ucai.fullcenter.R;
+import cn.ucai.fullcenter.utils.MFGT;
 
 
 /**
@@ -15,7 +16,8 @@ public class DisplayUtils {
         activity.findViewById(R.id.backClickArea).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.finish();
+//                activity.finish();
+                MFGT.finish(activity);
             }
         });
     }

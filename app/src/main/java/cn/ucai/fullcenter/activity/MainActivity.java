@@ -3,13 +3,13 @@ package cn.ucai.fullcenter.activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.ucai.fullcenter.FuLiCenterApplication;
 import cn.ucai.fullcenter.R;
 import cn.ucai.fullcenter.fragment.BoutiqueFragment;
 import cn.ucai.fullcenter.fragment.CategoryFragment;
@@ -96,7 +96,11 @@ public class MainActivity extends BaseActivity {
                 index = 3;
                 break;
             case R.id.layout_personal_center:
-                index = 4;
+                if(FuLiCenterApplication.getUsername() == null){
+                    MFGT.gotoLoginActivity(this);
+                }else {
+                    index = 4;
+                }
                 break;
         }
         setFragment();

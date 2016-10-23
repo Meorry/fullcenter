@@ -8,6 +8,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ucai.fullcenter.R;
+import cn.ucai.fullcenter.views.DisplayUtils;
 
 public class RegisterActivity extends BaseActivity {
 
@@ -24,15 +25,14 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ButterKnife.bind(this);
         setContentView(R.layout.activity_register);
-
+        ButterKnife.bind(this);
+        super.onCreate(savedInstanceState);
     }
 
     @Override
     protected void initView() {
-
+        DisplayUtils.initBackWithTitle(this,"用户注册");
     }
 
     @Override

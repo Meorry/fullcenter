@@ -13,6 +13,7 @@ import cn.ucai.fullcenter.activity.CategorySecondActivity;
 import cn.ucai.fullcenter.activity.GoodsDetailsActivit;
 import cn.ucai.fullcenter.activity.LoginActivity;
 import cn.ucai.fullcenter.activity.MainActivity;
+import cn.ucai.fullcenter.activity.RegisterActivity;
 import cn.ucai.fullcenter.bean.BoutiqueBean;
 import cn.ucai.fullcenter.bean.CategoryChildBean;
 
@@ -62,4 +63,9 @@ public class MFGT {
     public static void gotoLoginActivity(Activity context){
         startActivity(context, LoginActivity.class);
     }
+
+    public static void gotoRegisterActivity(Activity context){
+        startActivity(context, RegisterActivity.class);
+    }
+
 }
