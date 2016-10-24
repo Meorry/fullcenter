@@ -9,6 +9,7 @@ import cn.ucai.fullcenter.bean.CategoryGroupBean;
 import cn.ucai.fullcenter.bean.GoodsDetailsBean;
 import cn.ucai.fullcenter.bean.NewGoodsBean;
 import cn.ucai.fullcenter.bean.Result;
+import cn.ucai.fullcenter.bean.User;
 import cn.ucai.fullcenter.utils.MD5;
 
 /**
@@ -87,12 +88,12 @@ public class NetDao {
     }
 
     public static void login(Context context,String username,String password,
-                             OkHttpUtils.OnCompleteListener<Result> listener){
-        OkHttpUtils<Result> utils=new OkHttpUtils<>(context);
+                             OkHttpUtils.OnCompleteListener<String> listener){
+        OkHttpUtils<String> utils=new OkHttpUtils<>(context);
         utils.setRequestUrl(I.REQUEST_LOGIN)
                 .addParam(I.User.USER_NAME,username)
                 .addParam(I.User.PASSWORD,MD5.getMessageDigest(password))
-                .targetClass(Result.class)
+                .targetClass(String.class)
                 .execute(listener);
 
 

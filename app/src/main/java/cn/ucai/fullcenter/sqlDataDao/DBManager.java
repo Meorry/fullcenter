@@ -45,7 +45,7 @@ public class DBManager {
 
     public synchronized User getUset(String username){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        String sql = "select from " + UserDao.USER_TABLE_NAME + " where "
+        String sql = "select * from " + UserDao.USER_TABLE_NAME + " where "
                 + UserDao.USER_COLUMN_NAME + " =?";
         User user = null;
         Cursor cursor = db.rawQuery(sql,new String[]{username});
