@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:background="@color/personal_center_top_bg">
         <RelativeLayout
-            android:id="@+id/rl_user-title"
+            android:id="@+id/rl_user_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
@@ -33,7 +33,7 @@
 
         </RelativeLayout>
         <RelativeLayout
-            android:layout_below="@id/rl_user-title"
+            android:layout_below="@id/rl_user_title"
             android:id="@+id/rl_user_personal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -191,7 +191,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_margin="10dp"
             android:background="@color/white">
             <ImageView
                 android:id="@+id/iv_pay_money"

@@ -1,5 +1,6 @@
 package cn.ucai.fullcenter.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -137,4 +138,17 @@ public class MainActivity extends BaseActivity {
       finish();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(FuLiCenterApplication.getUser()!=null){
+            index = 4;
+        }
+        setFragment();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }
