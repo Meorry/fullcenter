@@ -10,12 +10,14 @@ import android.widget.EditText;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.ucai.fullcenter.FuLiCenterApplication;
 import cn.ucai.fullcenter.I;
 import cn.ucai.fullcenter.R;
 import cn.ucai.fullcenter.bean.Result;
 import cn.ucai.fullcenter.bean.User;
 import cn.ucai.fullcenter.netDao.NetDao;
 import cn.ucai.fullcenter.netDao.OkHttpUtils;
+import cn.ucai.fullcenter.sqlDataDao.UserDao;
 import cn.ucai.fullcenter.utils.CommonUtils;
 import cn.ucai.fullcenter.utils.L;
 import cn.ucai.fullcenter.utils.MFGT;
@@ -99,7 +101,14 @@ public class LoginActivity extends BaseActivity {
                     if (result.isRetMsg()){
                        User user = (User) result.getRetData();
                         L.d(TAG,"user="+user);
-                        MFGT.finish(mcontext);
+                        UserDao dao = new UserDao(mcontext);
+                        boolean isSuccess = dao.saveUser(user);
+                        if(isSuccess){
+                            FuLiCenterApplication.setUser(user);
+                            MFGT.finish(mcontext);
+                        }else {
+                           CommonUtils.showLongToast(R.string.user_datavase_error);
+                        }
                     }else {
                         if (result.getRetCode()==I.MSG_LOGIN_UNKNOW_USER){
                             CommonUtils.showLongToast(R.string.login_fail_unknow_user);
