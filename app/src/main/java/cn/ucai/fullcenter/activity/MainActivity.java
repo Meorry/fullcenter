@@ -11,6 +11,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.ucai.fullcenter.FuLiCenterApplication;
+import cn.ucai.fullcenter.I;
 import cn.ucai.fullcenter.R;
 import cn.ucai.fullcenter.fragment.BoutiqueFragment;
 import cn.ucai.fullcenter.fragment.CategoryFragment;
@@ -42,6 +43,8 @@ public class MainActivity extends BaseActivity {
     BoutiqueFragment mBoutiqueFragment;
     CategoryFragment mCategoryFragment;
     PersonalCenterFragment mPersonalCenterFragment;
+
+    public  static final String TAG = MainActivity.class.getSimpleName();
     @Override
     public void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
@@ -141,14 +144,16 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(FuLiCenterApplication.getUser()!=null){
-            index = 4;
-        }
+        L.e(TAG,"onResume...");
         setFragment();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        L.e(TAG,"onActivityResult,requestCode="+requestCode);
+        if(requestCode == I.REQUEST_CODE_LOGIN && FuLiCenterApplication.getUser()!=null){
+            index = 4;
+        }
     }
 }
