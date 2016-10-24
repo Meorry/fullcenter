@@ -17,6 +17,7 @@ import cn.ucai.fullcenter.bean.Result;
 import cn.ucai.fullcenter.bean.User;
 import cn.ucai.fullcenter.netDao.NetDao;
 import cn.ucai.fullcenter.netDao.OkHttpUtils;
+import cn.ucai.fullcenter.sqlDataDao.SharedPreferencesUtils;
 import cn.ucai.fullcenter.sqlDataDao.UserDao;
 import cn.ucai.fullcenter.utils.CommonUtils;
 import cn.ucai.fullcenter.utils.L;
@@ -104,6 +105,7 @@ public class LoginActivity extends BaseActivity {
                         UserDao dao = new UserDao(mcontext);
                         boolean isSuccess = dao.saveUser(user);
                         if(isSuccess){
+                            SharedPreferencesUtils.getInstance(mcontext).saveUser(user.getMuserName());
                             FuLiCenterApplication.setUser(user);
                             MFGT.finish(mcontext);
                         }else {

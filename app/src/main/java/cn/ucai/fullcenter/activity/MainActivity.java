@@ -14,6 +14,7 @@ import cn.ucai.fullcenter.R;
 import cn.ucai.fullcenter.fragment.BoutiqueFragment;
 import cn.ucai.fullcenter.fragment.CategoryFragment;
 import cn.ucai.fullcenter.fragment.NewGoodsFragment;
+import cn.ucai.fullcenter.fragment.PersonalCenterFragment;
 import cn.ucai.fullcenter.utils.L;
 import cn.ucai.fullcenter.utils.MFGT;
 
@@ -39,7 +40,7 @@ public class MainActivity extends BaseActivity {
     NewGoodsFragment mNewGoodsFragment;
     BoutiqueFragment mBoutiqueFragment;
     CategoryFragment mCategoryFragment;
-
+    PersonalCenterFragment mPersonalCenterFragment;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
@@ -54,9 +55,11 @@ public class MainActivity extends BaseActivity {
         mNewGoodsFragment = new NewGoodsFragment();
         mBoutiqueFragment = new BoutiqueFragment();
         mCategoryFragment = new CategoryFragment();
+        mPersonalCenterFragment = new PersonalCenterFragment();
         fragments[0] = mNewGoodsFragment;
         fragments[1] = mBoutiqueFragment;
         fragments[2] = mCategoryFragment;
+        fragments[4] = mPersonalCenterFragment;
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, mNewGoodsFragment)
                 .add(R.id.fragment_container, mBoutiqueFragment)
@@ -96,10 +99,11 @@ public class MainActivity extends BaseActivity {
                 index = 3;
                 break;
             case R.id.layout_personal_center:
-                if(FuLiCenterApplication.getUsername() == null){
+                if(FuLiCenterApplication.getUser() == null){
                     MFGT.gotoLoginActivity(this);
                 }else {
                     index = 4;
+
                 }
                 break;
         }
