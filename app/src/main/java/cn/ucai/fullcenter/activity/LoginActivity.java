@@ -145,7 +145,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onError(String error) {
                 CommonUtils.showShortToast(error);
-
+                L.e(TAG,"error="+error);
             }
         });
     }

@@ -22,11 +22,16 @@
     <string name="register_fail_exists">user name exists</string>
     <string name="login">Login</string>
     <string name="login_fail">登录失败</string>
-    <string name="logining">登录中</string>
+    <string name="logining">登录中s……</string>
     <string name="login_fail_unknow_user">登录失败，用户名不存在</string>
     <string name="login_fail_error_password">登录失败，密码错误</string>
     <string name="user_datavase_error">用户数据库操作异常</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="updatenick">昵称更新中……</string>
+    <string name="update_faile">更新昵称失败</string>
+    <string name="update_nick_fail_unmotify">昵称没有更新</string>
+    <string name="update_user_avater_iamge_fail">上传图片失败</string>
+    <string name="update_user_avater_iamge_sucess">上传成功</string>
 </resources>

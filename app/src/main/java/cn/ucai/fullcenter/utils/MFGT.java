@@ -15,6 +15,7 @@ import cn.ucai.fullcenter.activity.LoginActivity;
 import cn.ucai.fullcenter.activity.MainActivity;
 import cn.ucai.fullcenter.activity.PersonalCenterActivity;
 import cn.ucai.fullcenter.activity.RegisterActivity;
+import cn.ucai.fullcenter.activity.UpdateUserNickActivity;
 import cn.ucai.fullcenter.bean.BoutiqueBean;
 import cn.ucai.fullcenter.bean.CategoryChildBean;
 
@@ -82,5 +83,8 @@ public class MFGT {
         Intent intent = new Intent();
         intent.setClass(context,PersonalCenterActivity.class);
         startActivity(context,intent);
+    }
+    public static void gotoUpdateUserNickActivity(Activity context){
+        startActivity(context, UpdateUserNickActivity.class);
     }
 }

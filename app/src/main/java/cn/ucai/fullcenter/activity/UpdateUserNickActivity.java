@@ -98,6 +98,7 @@ public class UpdateUserNickActivity extends BaseActivity {
 
             @Override
             public void onError(String error) {
+                pd.dismiss();
                 CommonUtils.showShortToast(error);
                 L.e(TAG,"error="+error);
             }

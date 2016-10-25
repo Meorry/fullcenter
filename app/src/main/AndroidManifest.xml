@@ -23,7 +23,9 @@
         <activity android:name=".activity.BoutiqueSecondActivity" />
         <activity android:name=".activity.CategorySecondActivity" />
         <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.RegisterActivity"></activity>
+        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.PersonalCenterActivity" />
+        <activity android:name=".activity.UpdateUserNickActivity"></activity>
     </application>
 
 </manifest>
