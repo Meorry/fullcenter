@@ -70,6 +70,8 @@
             android:layout_marginLeft="10dp"
             android:layout_toLeftOf="@id/iv_usernick_right_arrow"
             android:layout_marginRight="10dp"
+            android:singleLine="true"
+            android:background="@color/white"
             android:layout_centerVertical="true"/>
     </RelativeLayout>
     <RelativeLayout
