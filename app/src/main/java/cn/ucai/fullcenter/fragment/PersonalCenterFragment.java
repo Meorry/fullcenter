@@ -42,12 +42,12 @@ public class PersonalCenterFragment extends BaseFragment {
     @Override
     protected void initView() {
         User user = FuLiCenterApplication.getUser();
-        L.e(TAG,"user="+user);
-        if(user==null){
+        L.e(TAG, "user=" + user);
+        if (user == null) {
             MFGT.gotoLoginActivity(mContext);
-        }else {
-            ImageLoader.setAvatar(ImageLoader.getAvatarUrl(user),mContext,mivUserAvatar);
-           mtvUserName.setText(user.getMuserName());
+        } else {
+            ImageLoader.setAvatar(ImageLoader.getAvatarUrl(user), mContext, mivUserAvatar);
+            mtvUserName.setText(user.getMuserName());
         }
     }
 
@@ -61,7 +61,16 @@ public class PersonalCenterFragment extends BaseFragment {
 
     }
 
-    @OnClick(R.id.bt_user_setting)
-    public void onClick() {
+
+    @OnClick({R.id.bt_user_setting, R.id.rl_user_title})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.bt_user_setting:
+                MFGT.gotoPersonalCenterActivity(mContext);
+                break;
+            case R.id.rl_user_personal:
+                MFGT.gotoPersonalCenterActivity(mContext);
+                break;
+        }
     }
 }
