@@ -79,6 +79,7 @@ public class PersonalCenterActivity extends BaseActivity {
             SharedPreferencesUtils.getInstance(mContext).removeUser();
             FuLiCenterApplication.setUser(null);
             MFGT.gotoLoginActivity(mContext);
+            finish();
         }
     }
 }

@@ -53,7 +53,6 @@ public class PersonalCenterFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-
     }
 
     @Override
@@ -61,8 +60,16 @@ public class PersonalCenterFragment extends BaseFragment {
 
     }
 
-
-    @OnClick({R.id.bt_user_setting, R.id.rl_user_title})
+    @Override
+    public void onResume() {
+        super.onResume();
+        User user = FuLiCenterApplication.getUser();
+        if (user != null) {
+            ImageLoader.setAvatar(ImageLoader.getAvatarUrl(user), mContext, mivUserAvatar);
+            mtvUserName.setText(user.getMuserName());
+        }
+    }
+    @OnClick({R.id.bt_user_setting, R.id.rl_user_personal})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_user_setting:

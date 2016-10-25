@@ -33,8 +33,8 @@
 
         </RelativeLayout>
         <RelativeLayout
-            android:layout_below="@id/rl_user_title"
             android:id="@+id/rl_user_personal"
+            android:layout_below="@id/rl_user_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"

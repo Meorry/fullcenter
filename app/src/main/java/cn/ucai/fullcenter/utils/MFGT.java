@@ -13,6 +13,7 @@ import cn.ucai.fullcenter.activity.CategorySecondActivity;
 import cn.ucai.fullcenter.activity.GoodsDetailsActivit;
 import cn.ucai.fullcenter.activity.LoginActivity;
 import cn.ucai.fullcenter.activity.MainActivity;
+import cn.ucai.fullcenter.activity.PersonalCenterActivity;
 import cn.ucai.fullcenter.activity.RegisterActivity;
 import cn.ucai.fullcenter.bean.BoutiqueBean;
 import cn.ucai.fullcenter.bean.CategoryChildBean;
@@ -75,5 +76,11 @@ public class MFGT {
     public static void startActivityForResult(Activity context,Intent intent,int requestCode){
         context.startActivityForResult(intent,requestCode);
         context.overridePendingTransition(R.anim.push_right_in,R.anim.push_right_out);
+    }
+
+    public static void gotoPersonalCenterActivity(Activity context){
+        Intent intent = new Intent();
+        intent.setClass(context,PersonalCenterActivity.class);
+        startActivity(context,intent);
     }
 }
