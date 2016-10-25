@@ -110,13 +110,16 @@ public class PersonalCenterActivity extends BaseActivity {
             return;
         }
         mOnSetAvatarListener.setAvatar(requestCode,data,mtvUserAvatarImage);
-        if(resultCode == OnSetAvatarListener.REQUEST_CROP_PHOTO){
+        if(requestCode == OnSetAvatarListener.REQUEST_CROP_PHOTO){
+            L.e("ssssssssssssssss");
             updateAvatarIamge();
         }
     }
 
     private void updateAvatarIamge() {
-        File file = OnSetAvatarListener.getAvatarFile(mContext,user.getMuserName());
+        //storage/emulated/0/Android/data/cn.ucai.fullcenter/files/Pictures/hahaha/ljy1234.jpg
+        File file = new File(OnSetAvatarListener.getAvatarPath(mContext,user.getMavatarPath()+ "/"
+                + user.getMuserName() + I.AVATAR_SUFFIX_JPG));
         L.e(TAG,"file="+file.exists());
         L.e(TAG,"file="+file.getAbsolutePath());
         NetDao.updateUserAvatar(mContext, user.getMuserName(), file, new OkHttpUtils.OnCompleteListener<String>() {
@@ -125,6 +128,18 @@ public class PersonalCenterActivity extends BaseActivity {
                 L.e(TAG,"s="+s);
                 Result result = ResultUtils.getResultFromJson(s,User.class);
                 L.e(TAG,"result="+result);
+                if(result==null){
+                   CommonUtils.showLongToast(R.string.update_user_avater_iamge_fail);
+                }else {
+                    User u = (User) result.getRetData();
+                    if(result.isRetMsg()){
+                        FuLiCenterApplication.setUser(u);
+                       ImageLoader.setAvatar(ImageLoader.getAvatarUrl(u),mContext,mtvUserAvatarImage);
+                        CommonUtils.showLongToast(R.string.update_user_avater_iamge_sucess);
+                    }else {
+                        CommonUtils.showLongToast(R.string.update_user_avater_iamge_fail);
+                    }
+                }
             }
 
             @Override
@@ -135,6 +150,7 @@ public class PersonalCenterActivity extends BaseActivity {
     }
 
     private void updatePersonalCenter() {
+        user = FuLiCenterApplication.getUser();
         if(user!=null){
             ImageLoader.setAvatar(ImageLoader.getAvatarUrl(user),mContext,mtvUserAvatarImage);
             mtvUserUsername.setText(user.getMuserName());
