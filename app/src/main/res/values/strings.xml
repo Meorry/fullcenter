@@ -34,4 +34,5 @@
     <string name="update_nick_fail_unmotify">昵称没有更新</string>
     <string name="update_user_avater_iamge_fail">上传图片失败</string>
     <string name="update_user_avater_iamge_sucess">上传成功</string>
+    <string name="collect_goods_title">collect  goods</string>
 </resources>
