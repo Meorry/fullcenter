@@ -35,4 +35,5 @@
     <string name="update_user_avater_iamge_fail">上传图片失败</string>
     <string name="update_user_avater_iamge_sucess">上传成功</string>
     <string name="collect_goods_title">collect  goods</string>
+    <string name="delete_collect_goods_fail">delete collect goods fail</string>
 </resources>
