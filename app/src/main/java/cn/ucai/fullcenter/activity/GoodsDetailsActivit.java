@@ -135,6 +135,51 @@ public class GoodsDetailsActivit extends BaseActivity {
     public void onBackClick() {
         MFGT.finish(this);
     }
+    @OnClick(R.id.ivGoodCollect)
+    public void onIsCollectGoodsClick() {
+        User user = FuLiCenterApplication.getUser();
+        if(user == null ){
+            MFGT.gotoLoginActivity(mContext);
+        }else {
+            if(isCollected){
+                NetDao.deleteCollectGoods(mContext, user.getMuserName(), goodId, new OkHttpUtils.OnCompleteListener<MessageBean>() {
+                    @Override
+                    public void onSuccess(MessageBean result) {
+                        if(result!=null && result.isSuccess()){
+                            isCollected = !isCollected;
+                            updateGoodsCellectedStatus();
+                            CommonUtils.showLongToast(mContext.getResources().getString(R.string.uncollect_goods));
+                        }
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        L.e("error="+error);
+                        CommonUtils.showLongToast(mContext.getResources().getString(R.string.uncollect_goods_fail));
+                    }
+                });
+            }else {
+                NetDao.addCollectGoods(mContext, user.getMuserName(), goodId, new OkHttpUtils.OnCompleteListener<MessageBean>() {
+                    @Override
+                    public void onSuccess(MessageBean result) {
+                        if(result!=null && result.isSuccess()){
+                            isCollected = !isCollected;
+                            updateGoodsCellectedStatus();
+                            CommonUtils.showLongToast(mContext.getResources().getString(R.string.collect_goods_success));
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        L.e("error="+error);
+                        CommonUtils.showLongToast(mContext.getResources().getString(R.string.collect_goods_fail));
+                    }
+                });
+            }
+        }
+    }
+
 
     private void isCollected() {
         User user = FuLiCenterApplication.getUser();

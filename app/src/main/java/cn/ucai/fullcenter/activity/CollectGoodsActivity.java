@@ -162,4 +162,9 @@ public class CollectGoodsActivity extends BaseActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
+    }
 }

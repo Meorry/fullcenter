@@ -24,4 +24,8 @@
     <string name="login">登录</string>
     <string name="collect_goods_title">收藏的商品</string>
     <string name="delete_collect_goods_fail">删除收藏商品失败</string>
+    <string name="collect_goods_success">收藏商品成功</string>
+    <string name="uncollect_goods">取消商品收藏</string>
+    <string name="collect_goods_fail">收藏商品失败</string>
+    <string name="uncollect_goods_fail">取消商品收藏</string>
 </resources>
