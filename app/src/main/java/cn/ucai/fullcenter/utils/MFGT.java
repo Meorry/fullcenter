@@ -10,6 +10,7 @@ import cn.ucai.fullcenter.I;
 import cn.ucai.fullcenter.R;
 import cn.ucai.fullcenter.activity.BoutiqueSecondActivity;
 import cn.ucai.fullcenter.activity.CategorySecondActivity;
+import cn.ucai.fullcenter.activity.CollectGoodsActivity;
 import cn.ucai.fullcenter.activity.GoodsDetailsActivit;
 import cn.ucai.fullcenter.activity.LoginActivity;
 import cn.ucai.fullcenter.activity.MainActivity;
@@ -87,4 +88,9 @@ public class MFGT {
     public static void gotoUpdateUserNickActivity(Activity context){
         startActivity(context, UpdateUserNickActivity.class);
     }
+
+    public static void gotoCollectGoodsActivity(Activity context){
+        startActivity(context, CollectGoodsActivity.class);
+    }
+
 }
