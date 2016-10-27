@@ -327,6 +327,9 @@ public interface I {
     int MSG_UNKNOW=999;//未知错误
     int MSG_ILLEGAL_REQUEST=-1;    //非法请求
 
+
+    /** isChecked被选择之后发送广播**/
+    String CARD_UPDATE_BROADCAST = "card_update_broadcast";
     /** 上传头像图片的类型：user_avatar或group_icon */
     String AVATAR_TYPE = "avatarType";
     String AVATAR_SUFFIX = "m_avatar_suffix";

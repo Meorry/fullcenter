@@ -28,4 +28,5 @@
     <string name="uncollect_goods">取消商品收藏</string>
     <string name="collect_goods_fail">收藏商品失败</string>
     <string name="uncollect_goods_fail">取消商品收藏</string>
+    <string name="card_title">购物车</string>
 </resources>

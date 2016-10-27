@@ -46,10 +46,6 @@ public class CardFragment extends BaseFragment {
     RecyclerView rlv;
     @BindView(R.id.sfl)
     SwipeRefreshLayout sfl;
-    LinearLayoutManager mLinearLayoutManager;
-    MainActivity mContext;
-    CardAdapter mAdapter;
-    ArrayList<CartBean> mList;
     @BindView(R.id.tv_card_price_count)
     TextView tvCardPriceCount;
     @BindView(R.id.tv_card_goods_price_Count)
@@ -62,7 +58,13 @@ public class CardFragment extends BaseFragment {
     Button btCardPay;
     @BindView(R.id.rl_card_pay_price)
     RelativeLayout rlCardPayPrice;
+    @BindView(R.id.tv_card_nothing)
+    TextView tvCardNothing;
 
+    LinearLayoutManager mLinearLayoutManager;
+    MainActivity mContext;
+    CardAdapter mAdapter;
+    ArrayList<CartBean> mList;
     UpdateCardPrice mUpdateCardPrice;
     public CardFragment() {
     }
@@ -87,7 +89,7 @@ public class CardFragment extends BaseFragment {
         setPullDownListener();
         mUpdateCardPrice = new UpdateCardPrice();
         IntentFilter filter = new IntentFilter(I.CARD_UPDATE_BROADCAST);
-        mContext.registerReceiver(mUpdateCardPrice,filter);
+        mContext.registerReceiver(mUpdateCardPrice, filter);
     }
 
     private void setPullDownListener() {
@@ -121,6 +123,8 @@ public class CardFragment extends BaseFragment {
                         mList = list;
                         mAdapter.initData(mList);
                         setCardLayout(true);
+                    }else {
+                        setCardLayout(false);
                     }
                 }
 
@@ -151,44 +155,47 @@ public class CardFragment extends BaseFragment {
     }
 
     private void setCardLayout(boolean hasCard) {
-          rlCardPayPrice.setVisibility(hasCard? View.VISIBLE:View.GONE);
+        tvCardNothing.setVisibility(hasCard ? View.GONE : View.VISIBLE);
+        rlCardPayPrice.setVisibility(hasCard ? View.VISIBLE : View.GONE);
     }
 
     @OnClick(R.id.bt_card_pay)
     public void onClick() {
     }
-    
-    private  void sumPrice(){
+
+    private void sumPrice() {
         int sumPrice = 0;
         int ranPrice = 0;
-        if(mList!=null && mList.size()>0){
-            for (CartBean c:mList) {
-                if(c.isChecked()){
-                    sumPrice += getPrice(c.getGoods().getCurrencyPrice())*c.getCount();
-                    L.e(TAG,"sumPrice="+sumPrice);
-                    ranPrice += getPrice(c.getGoods().getRankPrice())*c.getCount();
-                    L.e(TAG,"ranPrice="+ranPrice);
+        if (mList != null && mList.size() > 0) {
+            for (CartBean c : mList) {
+                if (c.isChecked()) {
+                    sumPrice += getPrice(c.getGoods().getCurrencyPrice()) * c.getCount();
+                    L.e(TAG, "sumPrice=" + sumPrice);
+                    ranPrice += getPrice(c.getGoods().getRankPrice()) * c.getCount();
+                    L.e(TAG, "ranPrice=" + ranPrice);
                 }
             }
-            tvCardGoodsPriceCount.setText(Double.valueOf(ranPrice)+"");
-            tvCardSaveGoodsPriceCount.setText(Double.valueOf(sumPrice-ranPrice)+"");
-        }else {
+            tvCardGoodsPriceCount.setText(Double.valueOf(ranPrice) + "");
+            tvCardSaveGoodsPriceCount.setText(Double.valueOf(sumPrice - ranPrice) + "");
+        } else {
+            setCardLayout(false);
             tvCardGoodsPriceCount.setText(String.valueOf(0));
             tvCardSaveGoodsPriceCount.setText(String.valueOf(0));
         }
     }
 
-    private int getPrice(String price){
-        price = price.substring(price.indexOf("￥")+1);
+    private int getPrice(String price) {
+        price = price.substring(price.indexOf("￥") + 1);
         return Integer.valueOf(price);
     }
 
-    class UpdateCardPrice extends BroadcastReceiver{
+    class UpdateCardPrice extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            L.e(TAG,"UpdateCardPriceReceiver....");
-           sumPrice();
+            L.e(TAG, "UpdateCardPriceReceiver....");
+            sumPrice();
+            setCardLayout(mList != null && mList.size() > 0);
         }
     }
 
