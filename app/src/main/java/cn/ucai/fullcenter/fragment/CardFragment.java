@@ -195,6 +195,7 @@ public class CardFragment extends BaseFragment {
         public void onReceive(Context context, Intent intent) {
             L.e(TAG, "UpdateCardPriceReceiver....");
             sumPrice();
+            L.e(TAG, "mList="+mList.size());
             setCardLayout(mList != null && mList.size() > 0);
         }
     }
