@@ -15,6 +15,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.ucai.fullcenter.R;
 import cn.ucai.fullcenter.bean.CartBean;
+import cn.ucai.fullcenter.bean.GoodsDetailsBean;
+import cn.ucai.fullcenter.utils.ImageLoader;
 
 public class CardAdapter extends RecyclerView.Adapter {
     Context mContext;
@@ -35,13 +37,16 @@ public class CardAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        CardViewHolder bh = (CardViewHolder) holder;
+        CardViewHolder ch = (CardViewHolder) holder;
         CartBean mCartBean = mList.get(position);
-//            ImageLoader.downloadImg(mContext,bh.ivBoutiqueImage,mCartBean.getImageurl());
-//            bh.tvBoutiqueTitle.setText(mCartBean.getTitle());
-//            bh.tvBoutiqueName.setText(mCartBean.getName());
-//            bh.tvBoutiqueDescription.setText(mCartBean.getDescription());
-//            bh.mLinearLayout.setTag(mCartBean);
+        GoodsDetailsBean goods = mCartBean.getGoods();
+        if(goods!=null) {
+            ImageLoader.downloadImg(mContext,ch.ivCardGoodsImage,goods.getGoodsThumb());
+            ch.ivCardGoodsName.setText(goods.getGoodsName());
+            ch.tvCardGoodsPrice.setText(goods.getCurrencyPrice());
+        }
+        ch.tvCardGoodsCount.setText("("+mCartBean.getCount()+")");
+        ch.cbCardChecked.setChecked(false);
     }
 
     @Override
