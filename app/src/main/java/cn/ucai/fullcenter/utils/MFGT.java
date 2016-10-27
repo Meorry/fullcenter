@@ -68,7 +68,11 @@ public class MFGT {
         intent.setClass(context,LoginActivity.class);
         startActivityForResult(context,intent,I.REQUEST_CODE_LOGIN);
     }
-
+    public static void gotoLoginCardFragmentActivity(Activity context){
+        Intent intent = new Intent();
+        intent.setClass(context,LoginActivity.class);
+        startActivityForResult(context,intent,I.REQUEST_CODE_LOGIN_CARD);
+    }
     public static void gotoRegisterActivity(Activity context){
         Intent intent = new Intent();
         intent.setClass(context,RegisterActivity.class);

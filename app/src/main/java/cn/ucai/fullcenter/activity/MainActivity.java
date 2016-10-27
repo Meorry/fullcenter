@@ -14,6 +14,7 @@ import cn.ucai.fullcenter.FuLiCenterApplication;
 import cn.ucai.fullcenter.I;
 import cn.ucai.fullcenter.R;
 import cn.ucai.fullcenter.fragment.BoutiqueFragment;
+import cn.ucai.fullcenter.fragment.CardFragment;
 import cn.ucai.fullcenter.fragment.CategoryFragment;
 import cn.ucai.fullcenter.fragment.NewGoodsFragment;
 import cn.ucai.fullcenter.fragment.PersonalCenterFragment;
@@ -43,6 +44,7 @@ public class MainActivity extends BaseActivity {
     BoutiqueFragment mBoutiqueFragment;
     CategoryFragment mCategoryFragment;
     PersonalCenterFragment mPersonalCenterFragment;
+    CardFragment mCardFragment;
 
     public  static final String TAG = MainActivity.class.getSimpleName();
     @Override
@@ -59,17 +61,19 @@ public class MainActivity extends BaseActivity {
         mNewGoodsFragment = new NewGoodsFragment();
         mBoutiqueFragment = new BoutiqueFragment();
         mCategoryFragment = new CategoryFragment();
+        mCardFragment = new CardFragment();
         mPersonalCenterFragment = new PersonalCenterFragment();
         fragments[0] = mNewGoodsFragment;
         fragments[1] = mBoutiqueFragment;
         fragments[2] = mCategoryFragment;
+        fragments[3] = mCardFragment;
         fragments[4] = mPersonalCenterFragment;
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, mNewGoodsFragment)
-                .add(R.id.fragment_container, mBoutiqueFragment)
-                .add(R.id.fragment_container,mCategoryFragment)
-                .hide(mCategoryFragment)
-                .hide(mBoutiqueFragment)
+//                .add(R.id.fragment_container, mBoutiqueFragment)
+//                .add(R.id.fragment_container,mCategoryFragment)
+//                .hide(mCategoryFragment)
+//                .hide(mBoutiqueFragment)
                 .show(mNewGoodsFragment).commit();
 
     }
@@ -100,7 +104,12 @@ public class MainActivity extends BaseActivity {
                 index = 2;
                 break;
             case R.id.layout_cart:
-                index = 3;
+                if(FuLiCenterApplication.getUser() == null){
+                    MFGT.gotoLoginCardFragmentActivity(this);
+                }else {
+                    index = 3;
+
+                }
                 break;
             case R.id.layout_personal_center:
                 if(FuLiCenterApplication.getUser() == null){
@@ -155,6 +164,9 @@ public class MainActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         L.e(TAG,"onActivityResult,requestCode="+requestCode);
+        if(requestCode == I.REQUEST_CODE_LOGIN_CARD && FuLiCenterApplication.getUser()!=null){
+            index = 3;
+        }
         if(requestCode == I.REQUEST_CODE_LOGIN && FuLiCenterApplication.getUser()!=null){
             index = 4;
         }
