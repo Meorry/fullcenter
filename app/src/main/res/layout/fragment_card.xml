@@ -4,6 +4,7 @@
     >
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/sfl"
+        android:layout_below="@+id/common_head_title_while"
         android:background="@color/list_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -19,6 +20,16 @@
                 android:gravity="center"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/tv_card_nothing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="购物车空空乳野"
+                android:textSize="18sp"
+                android:textColor="@color/orange"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="100dp"
+                android:gravity="center_horizontal|center_vertical"/>
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rlv"
                 android:layout_width="match_parent"
@@ -28,16 +39,18 @@
         </LinearLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
     <RelativeLayout
+        android:id="@+id/rl_card_pay_price"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="5dp"
+        android:background="@color/white"
         >
         <TextView
             android:id="@+id/tv_card_price_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="合计:"
+            android:text="合计: ¥"
             android:textSize="20sp"
             android:textColor="@color/cart_buy_bg"
             android:layout_marginTop="5dp"
@@ -47,7 +60,7 @@
             android:layout_toRightOf="@id/tv_card_price_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="¥110"
+            android:text="0"
             android:textSize="20sp"
             android:textColor="@color/cart_buy_bg"
             android:layout_marginTop="5dp"
@@ -56,7 +69,7 @@
             android:id="@+id/tv_card_save_price_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="节省:"
+            android:text="节省: ¥"
             android:layout_below="@id/tv_card_goods_price_Count"
             android:textSize="20sp"
             android:textColor="@color/good_detail_currency_price"
@@ -68,7 +81,7 @@
             android:layout_below="@id/tv_card_goods_price_Count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="¥10"
+            android:text="0"
             android:textSize="20sp"
             android:textColor="@color/cart_buy_bg"
             android:layout_marginTop="5dp"
