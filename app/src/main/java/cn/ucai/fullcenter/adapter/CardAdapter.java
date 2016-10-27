@@ -1,10 +1,12 @@
 package cn.ucai.fullcenter.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -13,6 +15,8 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import cn.ucai.fullcenter.I;
 import cn.ucai.fullcenter.R;
 import cn.ucai.fullcenter.bean.CartBean;
 import cn.ucai.fullcenter.bean.GoodsDetailsBean;
@@ -38,15 +42,22 @@ public class CardAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         CardViewHolder ch = (CardViewHolder) holder;
-        CartBean mCartBean = mList.get(position);
+        final CartBean mCartBean = mList.get(position);
         GoodsDetailsBean goods = mCartBean.getGoods();
-        if(goods!=null) {
-            ImageLoader.downloadImg(mContext,ch.ivCardGoodsImage,goods.getGoodsThumb());
+        if (goods != null) {
+            ImageLoader.downloadImg(mContext, ch.ivCardGoodsImage, goods.getGoodsThumb());
             ch.ivCardGoodsName.setText(goods.getGoodsName());
             ch.tvCardGoodsPrice.setText(goods.getCurrencyPrice());
         }
-        ch.tvCardGoodsCount.setText("("+mCartBean.getCount()+")");
+        ch.tvCardGoodsCount.setText("(" + mCartBean.getCount() + ")");
         ch.cbCardChecked.setChecked(false);
+        ch.cbCardChecked.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean b) {
+                mCartBean.setChecked(b);
+                mContext.sendBroadcast(new Intent(I.CARD_UPDATE_BROADCAST));
+            }
+        });
     }
 
     @Override
@@ -60,6 +71,17 @@ public class CardAdapter extends RecyclerView.Adapter {
         }
         mList.addAll(list);
         notifyDataSetChanged();
+    }
+
+    @OnClick({R.id.iv_card_add, R.id.iv_card_del})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.iv_card_add:
+
+                break;
+            case R.id.iv_card_del:
+                break;
+        }
     }
 
 
