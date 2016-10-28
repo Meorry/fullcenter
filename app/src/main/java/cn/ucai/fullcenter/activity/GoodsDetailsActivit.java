@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -51,6 +52,20 @@ public class GoodsDetailsActivit extends BaseActivity {
     GoodsDetailsActivit mContext;
 
     boolean isCollected = false;
+    @BindView(R.id.tvCommonHeadTitle)
+    TextView tvCommonHeadTitle;
+    @BindView(R.id.ivGoodShare)
+    ImageView ivGoodShare;
+    @BindView(R.id.ivGoodCart)
+    ImageView ivGoodCart;
+    @BindView(R.id.tvGoodsCartCount)
+    TextView tvGoodsCartCount;
+    @BindView(R.id.layout_image)
+    RelativeLayout layoutImage;
+    @BindView(R.id.layout_banner)
+    RelativeLayout layoutBanner;
+    @BindView(R.id.layout_goods_details)
+    RelativeLayout layoutGoodsDetails;
 
 
     @Override
@@ -213,6 +228,7 @@ public class GoodsDetailsActivit extends BaseActivity {
             ivGoodCollect.setImageResource(R.mipmap.bg_collect_in);
         }
     }
+
     @OnClick(R.id.ivGoodShare)
     public void showShare() {
         ShareSDK.initSDK(this);
@@ -243,5 +259,30 @@ public class GoodsDetailsActivit extends BaseActivity {
 
         // 启动分享GUI
         oks.show(this);
+    }
+
+    @OnClick(R.id.ivGoodCart)
+    public void onIsAddCartClick() {
+        User user = FuLiCenterApplication.getUser();
+        if (user == null) {
+            MFGT.gotoLoginActivity(mContext);
+        } else {
+            NetDao.addCartGoods(mContext, user.getMuserName(), goodId, new OkHttpUtils.OnCompleteListener<MessageBean>() {
+                @Override
+                public void onSuccess(MessageBean result) {
+                    if (result != null && result.isSuccess()) {
+                        CommonUtils.showLongToast(mContext.getResources().getString(R.string.add_cart_goods_success));
+                    }else {
+                        CommonUtils.showLongToast(mContext.getResources().getString(R.string.add_cart_goods_fail));
+                    }
+                }
+
+                @Override
+                public void onError(String error) {
+                    L.e("error= "+error);
+                    CommonUtils.showLongToast(mContext.getResources().getString(R.string.add_cart_goods_fail));
+                }
+            });
+        }
     }
 }
