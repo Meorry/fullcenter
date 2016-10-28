@@ -25,6 +25,7 @@ import cn.ucai.fullcenter.netDao.NetDao;
 import cn.ucai.fullcenter.netDao.OkHttpUtils;
 import cn.ucai.fullcenter.utils.ImageLoader;
 import cn.ucai.fullcenter.utils.L;
+import cn.ucai.fullcenter.utils.MFGT;
 
 public class CardAdapter extends RecyclerView.Adapter {
     Context mContext;
@@ -32,8 +33,9 @@ public class CardAdapter extends RecyclerView.Adapter {
 
     public CardAdapter(Context context, ArrayList<CartBean> list) {
         mContext = context;
-        mList = new ArrayList<>();
-        mList.addAll(list);
+//        mList = new ArrayList<>();
+//        mList.addAll(list);
+        mList = list;
     }
 
     @Override
@@ -71,10 +73,11 @@ public class CardAdapter extends RecyclerView.Adapter {
     }
 
     public void initData(ArrayList<CartBean> list) {
-        if (mList != null) {
-            mList.clear();
-        }
-        mList.addAll(list);
+//        if (mList != null) {
+//            mList.clear();
+//        }
+//        mList.addAll(list);
+        mList = list;
         notifyDataSetChanged();
     }
 
@@ -104,33 +107,33 @@ public class CardAdapter extends RecyclerView.Adapter {
 
         @OnClick({R.id.iv_card_add, R.id.iv_card_del})
         public void onClick(View view) {
-            final int  postion = (int) rlLayoutCard.getTag();
+            final int postion = (int) rlLayoutCard.getTag();
             final CartBean cart = mList.get(postion);
             switch (view.getId()) {
                 case R.id.iv_card_add:
-                        NetDao.updateCardCount(mContext, cart.getId(), cart.getCount(), new OkHttpUtils.OnCompleteListener<MessageBean>() {
-                            @Override
-                            public void onSuccess(MessageBean result) {
-                                if(result!=null && result.isSuccess()){
-                                    mList.get(postion).setCount(mList.get(postion).getCount()+1);
-                                    mContext.sendBroadcast(new Intent(I.CARD_UPDATE_BROADCAST));
-                                    tvCardGoodsCount.setText("(" + mList.get(postion).getCount() + ")");
-                                }
+                    NetDao.updateCardCount(mContext, cart.getId(), cart.getCount(), new OkHttpUtils.OnCompleteListener<MessageBean>() {
+                        @Override
+                        public void onSuccess(MessageBean result) {
+                            if (result != null && result.isSuccess()) {
+                                mList.get(postion).setCount(mList.get(postion).getCount() + 1);
+                                mContext.sendBroadcast(new Intent(I.CARD_UPDATE_BROADCAST));
+                                tvCardGoodsCount.setText("(" + mList.get(postion).getCount() + ")");
                             }
+                        }
 
-                            @Override
-                            public void onError(String error) {
-                                L.e("error="+error);
-                            }
-                        });
+                        @Override
+                        public void onError(String error) {
+                            L.e("error=" + error);
+                        }
+                    });
                     break;
                 case R.id.iv_card_del:
-                    if(cart.getCount()>1){
+                    if (cart.getCount() > 1) {
                         NetDao.updateCardCount(mContext, cart.getId(), cart.getCount(), new OkHttpUtils.OnCompleteListener<MessageBean>() {
                             @Override
                             public void onSuccess(MessageBean result) {
-                                if(result!=null && result.isSuccess()){
-                                    mList.get(postion).setCount(mList.get(postion).getCount()-1);
+                                if (result != null && result.isSuccess()) {
+                                    mList.get(postion).setCount(mList.get(postion).getCount() - 1);
                                     mContext.sendBroadcast(new Intent(I.CARD_UPDATE_BROADCAST));
                                     tvCardGoodsCount.setText("(" + mList.get(postion).getCount() + ")");
                                 }
@@ -138,14 +141,14 @@ public class CardAdapter extends RecyclerView.Adapter {
 
                             @Override
                             public void onError(String error) {
-                                L.e("error="+error);
+                                L.e("error=" + error);
                             }
                         });
-                    }else {
+                    } else {
                         NetDao.deleteCardGoods(mContext, cart.getId(), new OkHttpUtils.OnCompleteListener<MessageBean>() {
                             @Override
                             public void onSuccess(MessageBean result) {
-                                if(result!=null && result.isSuccess()){
+                                if (result != null && result.isSuccess()) {
                                     mList.remove(postion);
                                     mContext.sendBroadcast(new Intent(I.CARD_UPDATE_BROADCAST));
                                     notifyDataSetChanged();
@@ -154,14 +157,19 @@ public class CardAdapter extends RecyclerView.Adapter {
 
                             @Override
                             public void onError(String error) {
-                                L.e("error="+error);
+                                L.e("error=" + error);
                             }
                         });
                     }
-
                     break;
             }
         }
+                @OnClick({R.id.iv_card_goods_image,R.id.iv_card_goodsName,R.id.tv_card_goods_price})
+                public void onGotodetailClick(View view){
+                    final int postion = (int) rlLayoutCard.getTag();
+                    final CartBean cart = mList.get(postion);
+                    MFGT.gotoGoodsDetailsActivity(mContext, cart.getGoodsId());
+                }
     }
 }
 
