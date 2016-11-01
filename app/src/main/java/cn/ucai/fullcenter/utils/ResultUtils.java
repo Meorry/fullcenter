@@ -77,6 +77,13 @@ public class ResultUtils {
         return  null;
     }
 
+    /**
+     * 转集合
+     * @param jsonStr
+     * @param clazz
+     * @param <T>
+     * @return
+     */
     public static <T> Result getListResultFromJson(String jsonStr,Class<T> clazz){
         Result result = new Result();
         Log.e("Utils","jsonStr="+jsonStr);

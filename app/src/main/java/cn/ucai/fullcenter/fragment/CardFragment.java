@@ -33,6 +33,7 @@ import cn.ucai.fullcenter.netDao.OkHttpUtils;
 import cn.ucai.fullcenter.utils.CommonUtils;
 import cn.ucai.fullcenter.utils.ConvertUtils;
 import cn.ucai.fullcenter.utils.L;
+import cn.ucai.fullcenter.utils.MFGT;
 import cn.ucai.fullcenter.views.SpaceItemDecoration;
 
 /**
@@ -66,6 +67,8 @@ public class CardFragment extends BaseFragment {
     CardAdapter mAdapter;
     ArrayList<CartBean> mList;
     UpdateCardPrice mUpdateCardPrice;
+    String cartIds = "";
+
     public CardFragment() {
     }
 
@@ -96,7 +99,7 @@ public class CardFragment extends BaseFragment {
         sfl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                sfl.setRefreshing(true);
+//                sfl.setRefreshing(true);
                 tvRefresh.setVisibility(View.VISIBLE);
                 downloadCart();
             }
@@ -160,15 +163,22 @@ public class CardFragment extends BaseFragment {
     }
 
     @OnClick(R.id.bt_card_pay)
-    public void onClick() {
+    public void onBuyClick() {
+        if(cartIds != null && !cartIds.equals("" )&& cartIds.length()>0){
+            MFGT.gotoBuy(mContext,cartIds);
+        }else {
+            CommonUtils.showLongToast(R.string.no_order_goods);
+        }
     }
 
     private void sumPrice() {
+        cartIds = "";
         int sumPrice = 0;
         int ranPrice = 0;
         if (mList != null && mList.size() > 0) {
             for (CartBean c : mList) {
                 if (c.isChecked()) {
+                    cartIds += c.getId()+",";
                     sumPrice += getPrice(c.getGoods().getCurrencyPrice()) * c.getCount();
                     L.e(TAG, "sumPrice=" + sumPrice);
                     ranPrice += getPrice(c.getGoods().getRankPrice()) * c.getCount();
@@ -178,7 +188,7 @@ public class CardFragment extends BaseFragment {
             tvCardGoodsPriceCount.setText(Double.valueOf(ranPrice) + "");
             tvCardSaveGoodsPriceCount.setText(Double.valueOf(sumPrice - ranPrice) + "");
         } else {
-            setCardLayout(false);
+            cartIds = "";
             tvCardGoodsPriceCount.setText(String.valueOf(0));
             tvCardSaveGoodsPriceCount.setText(String.valueOf(0));
         }
@@ -203,6 +213,7 @@ public class CardFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
+        downloadCart();
     }
 
     @Override

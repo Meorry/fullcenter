@@ -14,16 +14,12 @@ import cn.ucai.fullcenter.bean.GoodsDetailsBean;
 import cn.ucai.fullcenter.bean.MessageBean;
 import cn.ucai.fullcenter.bean.NewGoodsBean;
 import cn.ucai.fullcenter.bean.Result;
-import cn.ucai.fullcenter.bean.User;
 import cn.ucai.fullcenter.utils.MD5;
 
-/**
- * Created by Administrator on 2016/10/17.
- */
 public class NetDao {
 
     public static void downLoadNewGoods(Context mcontext,int catId, int pageId, OkHttpUtils.OnCompleteListener<NewGoodsBean[]> listener){
-        OkHttpUtils utils=new OkHttpUtils(mcontext);
+        OkHttpUtils<NewGoodsBean[]> utils=new OkHttpUtils<>(mcontext);
         utils.setRequestUrl(I.REQUEST_FIND_NEW_BOUTIQUE_GOODS)
                 .addParam(I.NewAndBoutiqueGoods.CAT_ID,String.valueOf(catId))
                 .addParam(I.PAGE_ID,String.valueOf(pageId))
@@ -32,7 +28,7 @@ public class NetDao {
                 .execute(listener);
     }
     public static void downLoadGoodsDetails(Context mcontext, int goodsId, OkHttpUtils.OnCompleteListener<GoodsDetailsBean> listener){
-        OkHttpUtils utils=new OkHttpUtils(mcontext);
+        OkHttpUtils<GoodsDetailsBean> utils=new OkHttpUtils<>(mcontext);
         utils.setRequestUrl(I.REQUEST_FIND_GOOD_DETAILS)
                 .addParam(I.GoodsDetails.KEY_GOODS_ID,String.valueOf(goodsId))
                 .targetClass(GoodsDetailsBean.class)
@@ -40,21 +36,21 @@ public class NetDao {
     }
 
     public static void downLoadBoutique(Context mcontext, OkHttpUtils.OnCompleteListener<BoutiqueBean[]> listener){
-        OkHttpUtils utils = new OkHttpUtils(mcontext);
+        OkHttpUtils<BoutiqueBean[]> utils = new OkHttpUtils<>(mcontext);
         utils.setRequestUrl(I.REQUEST_FIND_BOUTIQUES)
                 .targetClass(BoutiqueBean[].class)
                 .execute(listener);
     }
 
     public static void downLoadCategoryGroup(Context context, OkHttpUtils.OnCompleteListener<CategoryGroupBean[]> listener){
-        OkHttpUtils utils = new OkHttpUtils(context);
+        OkHttpUtils<CategoryGroupBean[]> utils = new OkHttpUtils<>(context);
         utils.setRequestUrl(I.REQUEST_FIND_CATEGORY_GROUP)
                 .targetClass(CategoryGroupBean[].class)
                 .execute(listener);
     }
 
     public static void downLoadCategoryChild(Context context,int parentId, OkHttpUtils.OnCompleteListener<CategoryChildBean[]> listener){
-        OkHttpUtils utils = new OkHttpUtils(context);
+        OkHttpUtils<CategoryChildBean[]> utils = new OkHttpUtils<>(context);
         utils.setRequestUrl(I.REQUEST_FIND_CATEGORY_CHILDREN)
                 .addParam(I.CategoryChild.PARENT_ID,String.valueOf(parentId))
                 .targetClass(CategoryChildBean[].class)
@@ -63,12 +59,9 @@ public class NetDao {
 
     /**
      * 下载category
-     * @param mcontext
-     * @param catId
-     * @param listener
      */
     public static void downLoadCategoryGoods(Context mcontext, int catId,int pageId, OkHttpUtils.OnCompleteListener<NewGoodsBean[]> listener){
-        OkHttpUtils utils=new OkHttpUtils(mcontext);
+        OkHttpUtils<NewGoodsBean[]> utils=new OkHttpUtils<>(mcontext);
         utils.setRequestUrl(I.REQUEST_FIND_GOODS_DETAILS)
                 .addParam(I.NewAndBoutiqueGoods.CAT_ID,String.valueOf(catId))
                 .addParam(I.PAGE_ID,String.valueOf(pageId))
@@ -203,4 +196,14 @@ public class NetDao {
                 .execute(listener);
     }
 
+    public static void addCartGoods(Context context,String username,int goodId,OkHttpUtils.OnCompleteListener<MessageBean> listener) {
+        OkHttpUtils<MessageBean> utils = new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_ADD_CART)
+                .addParam(I.Cart.USER_NAME,username)
+                .addParam(I.Cart.GOODS_ID,String.valueOf(goodId))
+                .addParam(I.Cart.COUNT,String.valueOf(I.CART_CART_COUNT_DEFAULT))
+                .addParam(I.Cart.IS_CHECKED,String.valueOf(0))
+                .targetClass(MessageBean.class)
+                .execute(listener);
+    }
 }

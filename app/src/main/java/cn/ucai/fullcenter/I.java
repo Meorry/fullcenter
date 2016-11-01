@@ -257,6 +257,8 @@ public interface I {
     int SORT_BY_PRICE_DESC=2;
     int SORT_BY_ADDTIME_ASC=3;
     int SORT_BY_ADDTIME_DESC=4;
+
+    int CART_CART_COUNT_DEFAULT = 1;
     String ISON8859_1 = "iso8859-1";
     String UTF_8 = "utf-8";
     String PAGE_ID = "page_id";//分页的起始下标

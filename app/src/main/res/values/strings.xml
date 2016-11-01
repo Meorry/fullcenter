@@ -41,4 +41,8 @@
     <string name="collect_goods_fail">collect goods fial</string>
     <string name="uncollect_goods_fail">uncollect goods fail</string>
     <string name="card_title">card title</string>
+    <string name="add_cart_goods_success">已经添加到购物车</string>
+    <string name="add_cart_goods_fail">add cart goods fail</string>
+    <string name="no_order_goods">no order goods</string>
+    <string name="confirm_order">confirm order</string>
 </resources>

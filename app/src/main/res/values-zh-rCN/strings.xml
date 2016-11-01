@@ -29,4 +29,7 @@
     <string name="collect_goods_fail">收藏商品失败</string>
     <string name="uncollect_goods_fail">取消商品收藏</string>
     <string name="card_title">购物车</string>
+    <string name="add_cart_goods_fail">添加商品失败</string>
+    <string name="no_order_goods">没有选中商品</string>
+    <string name="confirm_order">订单详情</string>
 </resources>
