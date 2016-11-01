@@ -188,6 +188,7 @@ public class CardFragment extends BaseFragment {
             tvCardGoodsPriceCount.setText(Double.valueOf(ranPrice) + "");
             tvCardSaveGoodsPriceCount.setText(Double.valueOf(sumPrice - ranPrice) + "");
         } else {
+            setCardLayout(false);
             cartIds = "";
             tvCardGoodsPriceCount.setText(String.valueOf(0));
             tvCardSaveGoodsPriceCount.setText(String.valueOf(0));
@@ -213,12 +214,14 @@ public class CardFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        downloadCart();
+         initData();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if(mUpdateCardPrice != null){
         mContext.unregisterReceiver(mUpdateCardPrice);
+        }
     }
 }
